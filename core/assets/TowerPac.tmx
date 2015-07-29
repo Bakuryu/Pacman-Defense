@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="48" height="55" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="PacMan" tilewidth="16" tileheight="16">
+  <image source="../../../../../../Users/Bakuryu/Desktop/PacMan-master/PacMan/Resources/PacMan.png" width="160" height="160"/>
+ </tileset>
+ <layer name="Walls" width="48" height="55">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+1ZiW7DMAj17qPd1B3dJW3//5mLq6Eh9rCBkTbL8iQkKyX41QEbcCkLFixYsOA/4nSQs2S5ZOOLEeyfM/63mYvxhRtlnIUNGxP/o0GOG3Ji0CMdxJ/eexJitc31EP/VIGvl/64ZD02P6yD+lvesHMbmTzrR9yL8t+X7e0qpz5+FHhKkE3mvxwHx/0vYgHEkfq1x57WDvpEWvzRu+V5FKzY9e2QkxkvR/X8u/FuxU4ViB827LdhHKqRv9exoMa7FLx9bYDlbs3Q0cM4vxZdz8LnketG6r5gOjbXvwG1ac7E339/dgfZZmgv5KfdjyX9VdNBvXl/wQPJHiPJHcZkNnmcQqk9Ez18e44fi31rTHvi7h+Z/VX7GGEE+vwZ29s1f5paeeeV5GbVDsNZstGch347wR3asezn/vhnw5LDZPuKtmVHeGOGP7Hh6CV7QvOjcj/BH+8Ch9p+HQV6N8gjsRNbBC3T+/qY3MiX+kfpr3/xb/p9Vv4zp/1Pl7825tdysVX9Zc7x6fsl47/U/x/hmWTmehqz+iSU2tfrLa9vSP2kB1SYWHU/9YuUwR/6od4FqJBmrvR6pjPFWX6RV20X6n3yPGyMOJdCZhsD535V4HGb3PxF/ZPue6aH1b/mx1vezotc/lPMh273+2xz5W+ftIZv/e/Hdo1j6rpb8oWdHu5Op4w/2rjdnnVr/1np/KtelQsvbevensn+7Fb958gdUF0aRFSM9+3Pkj/ICeX/W8itP/qDlEdq9nbwzmNP9Kap5pi78/uUTUDP2XEApAAA=
+  </data>
+ </layer>
+</map>
