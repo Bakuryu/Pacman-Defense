@@ -34,6 +34,7 @@ public class SpriteRenderer
     private float stateTime;
     private CoordinateTranslator corT;
     private BitmapFont font;
+    private int pRotation;
 
     public SpriteRenderer(EntityManager entM, CoordinateTranslator corT)
     {
@@ -118,8 +119,21 @@ public class SpriteRenderer
         font.setColor(Color.GREEN);
         font.draw(sBatch, "HP: " + p.getHP(), pScrPos.x, pScrPos.y + 32);
         p.getCollider().updatePos(pScrPos);
-
-        sBatch.draw(curFrame, pScrPos.x, pScrPos.y - 16, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, 180);
+        switch (p.getDirMove())
+        {
+            case "R":
+                sBatch.draw(curFrame, pScrPos.x, pScrPos.y - 16, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, 180);
+                break;
+            case "L":
+                sBatch.draw(curFrame, pScrPos.x, pScrPos.y - 16, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, 0);
+                break;
+            case "U":
+                sBatch.draw(curFrame, pScrPos.x, pScrPos.y - 16, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, -90);
+                break;
+            case "D":
+                sBatch.draw(curFrame, pScrPos.x, pScrPos.y - 16, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, 90);
+                break;
+        }
         sBatch.end();
     }
 }

@@ -79,13 +79,7 @@ public class PlayerEntity extends Entity
     {
         System.out.println("HP: " + hp);
         contr.move(position, (int) t);
-
-        if (directionMoving != "R")
-        {
-            directionMoving = "R";
-            directionFacing = "R";
-            setAnimation(directionMoving);
-        }
+        directionMoving = contr.lastKeyPressed();
 
 //            if (!isCollidingWorld() && position.getX() < 293.0)
 //            {
@@ -95,18 +89,6 @@ public class PlayerEntity extends Entity
 //            {
 //                position.setX(position.getX() - 1);
 //            }
-        //contr.moveEntity(this, pMState, t);
-        if (Gdx.input.isKeyPressed(Keys.LEFT) && !(Gdx.input.isKeyPressed(Keys.LEFT) && Gdx.input.isKeyPressed(Keys.RIGHT)) && !(Gdx.input.isKeyPressed(Keys.LEFT) && Gdx.input.isKeyPressed(Keys.UP)) && !(Gdx.input.isKeyPressed(Keys.LEFT) && Gdx.input.isKeyPressed(Keys.DOWN)))
-        {
-
-            //if(position.getX() > 0.0)
-            //position.setX(position.getX() - t / 6.0);
-            if (directionMoving != "L")
-            {
-                directionMoving = "L";
-                directionFacing = "L";
-                setAnimation(directionMoving);
-            }
 
 //            if (!isCollidingWorld() && position.getX() > 0.0)
 //            {
@@ -116,18 +98,6 @@ public class PlayerEntity extends Entity
 //            {
 //                position.setX(position.getX() + 1);
 //            }
-        }
-
-        if (Gdx.input.isKeyPressed(Keys.UP) && !(Gdx.input.isKeyPressed(Keys.UP) && Gdx.input.isKeyPressed(Keys.RIGHT)) && !(Gdx.input.isKeyPressed(Keys.UP) && Gdx.input.isKeyPressed(Keys.LEFT)) && !(Gdx.input.isKeyPressed(Keys.UP) && Gdx.input.isKeyPressed(Keys.DOWN)))
-        {
-            //if(position.getY() < 300.0)
-            //position.setY(position.getY() + t / 6.0);
-            if (directionMoving != "U")
-            {
-                directionMoving = ("U");
-                directionFacing = "U";
-                setAnimation(directionMoving);
-            }
 
 //            if (!isCollidingWorld() && position.getY() < 300.0)
 //            {
@@ -137,17 +107,7 @@ public class PlayerEntity extends Entity
 //            {
 //                position.setY(position.getY() - 1);
 //            }
-        }
 
-        if (Gdx.input.isKeyPressed(Keys.DOWN) && !(Gdx.input.isKeyPressed(Keys.DOWN) && Gdx.input.isKeyPressed(Keys.RIGHT)) && !(Gdx.input.isKeyPressed(Keys.DOWN) && Gdx.input.isKeyPressed(Keys.UP)) && !(Gdx.input.isKeyPressed(Keys.DOWN) && Gdx.input.isKeyPressed(Keys.LEFT)))
-        {
-
-            if (directionMoving != "D")
-            {
-                directionMoving = ("D");
-                directionFacing = "D";
-                setAnimation(directionMoving);
-            }
 //            if (!isCollidingWorld() && position.getY() > 14)
 //            {
 //                position.setY(contr.getMovement(position, directionMoving, t));
@@ -157,17 +117,7 @@ public class PlayerEntity extends Entity
 //                position.setY(position.getY() + 1);
 //            }
 
-        }
 
-        if (!Gdx.input.isKeyPressed(Keys.LEFT) && !Gdx.input.isKeyPressed(Keys.RIGHT) && !Gdx.input.isKeyPressed(Keys.UP) && !Gdx.input.isKeyPressed(Keys.DOWN))
-        {
-            if (directionMoving != "N")
-            {
-                directionMoving = ("N");
-                setAnimation(directionMoving);
-            }
-
-        }
 
     }
 
@@ -212,18 +162,6 @@ public class PlayerEntity extends Entity
         return pAnim;
     }
 
-    /* Retrieve player's current movement state (Used by Controller)*/
-//    public String getMState()
-//    {
-//        return pMState;
-//    }
-//
-//    /* Retrieve player's last movement state (Used by Controller)*/
-//    public String getLDState()
-//    {
-//        return pLDState;
-//    }
-
     /* Retrieve player's collision box (Used by AgentEntity)*/
     public Collider getCollider()
     {
@@ -252,5 +190,10 @@ public class PlayerEntity extends Entity
     public int getHP()
     {
         return hp;
+    }
+    
+    public String getDirMove()
+    {
+        return directionMoving;
     }
 }

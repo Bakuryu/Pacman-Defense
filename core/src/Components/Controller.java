@@ -14,15 +14,22 @@ public class Controller
     private Input input;
     private String keyPressed;
     private String lastKeyPressed;
+    private boolean isMoving;
+    private double speed;
+
     //private Point2D movementP;
     public Controller()
     {
-       input = new Input();
-       keyPressed = "N";
+        input = new Input();
+        keyPressed = "L";
+        lastKeyPressed = "L";
+        isMoving = false;
+        speed = 40.0;
     }
 
     /**
      * Check if a movement input is pressed and move accordingly
+     *
      * @param curPos Player's current position
      * @param t Delta time
      */
@@ -32,29 +39,42 @@ public class Controller
         switch (keyPressed)
         {
             case "RIGHT":
-                curPos.setX(curPos.getX() + t / 25.0);
                 lastKeyPressed = "R";
                 break;
             case "LEFT":
-                curPos.setX(curPos.getX() - t / 25.0);
                 lastKeyPressed = "L";
                 break;
             case "UP":
-                curPos.setY(curPos.getY() + t / 25.0);
                 lastKeyPressed = "U";
                 break;
             case "DOWN":
-                curPos.setY(curPos.getY() - t / 25.0);
                 lastKeyPressed = "D";
                 break;
             case "NONE":
                 break;
         }
 
+        switch (lastKeyPressed)
+        {
+            case "R":
+                curPos.setX(curPos.getX() + speed * t / 1000);
+                break;
+            case "L":
+                curPos.setX(curPos.getX() - speed * t / 1000);
+                break;
+            case "U":
+                curPos.setY(curPos.getY() + speed * t / 1000);
+                break;
+            case "D":
+                curPos.setY(curPos.getY() - speed * t / 1000);
+                break;
+        }
+        System.out.println(curPos.getX() - speed * t / 1000);
     }
-    
+
     public String lastKeyPressed()
     {
         return lastKeyPressed;
     }
+
 }
