@@ -27,6 +27,7 @@ public class AnimationManager
     private int AFRAME_ROW;
     private int PFRAME_COL;
     private int PFRAME_ROW;
+    private String curPAnim;
 
 
     /* Animation to be return to entity*/
@@ -50,6 +51,7 @@ public class AnimationManager
         clyde = new Texture("graphics/ClydeAnim2.png");
         pacman = new Texture("graphics/PacmanAnim.png");
         scared = new Texture("graphics/BlueGhostAnim.png");
+        curPAnim = "IDLE";
 
     }
 
@@ -141,7 +143,7 @@ public class AnimationManager
         return anim;
     }
 
-    public Animation setPlayerAnimation()
+    public Animation setPlayerAnimation(String newAnim)
     {
         TextureRegion[][] tmp = TextureRegion.split(pacman, pacman.getWidth() / 4, pacman.getHeight());
         animFrames = new TextureRegion[PFRAME_ROW * PFRAME_COL];

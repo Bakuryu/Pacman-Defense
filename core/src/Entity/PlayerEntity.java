@@ -6,9 +6,12 @@
 package Entity;
 
 import Components.Collider;
+import Components.Controller;
 import Graphics.AnimationManager;
 import Math.CoordinateTranslator;
 import Math.Point2D;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Animation;
 
 /**
@@ -23,11 +26,11 @@ public class PlayerEntity extends Entity
     //private Point2D startPos;
     //private Point2D feetPos;
     /* Player's movement state (Left,Right,Up,Down,etc)*/
-    //private String pMState;
+    private String directionMoving;
     /* Player's last direction moved to determine what sprite to draw*/
-    //private String pLDState;
+    private String directionFacing;
     /* Controller used to move player*/
-    //private Controller contr;
+    private Controller contr;
     /* Animation Manager to retrieve proper animation based on player movement*/
     private AnimationManager animM;
     /* Current animation to be draw by SpriteRenderer*/
@@ -51,13 +54,13 @@ public class PlayerEntity extends Entity
         //startPos = new Point2D(x, y);
         //feetPos = new Point2D(x+4.3125,y-13.0625);
         position = new Point2D(x, y);
-        //pMState = "IDLE";
-        //pLDState = "D";
+        directionMoving = "N";
+        directionFacing = "D";
         hp = 10;
         animM = new AnimationManager();
-        pAnim = animM.setPlayerAnimation();
+        pAnim = animM.setPlayerAnimation(directionMoving);
         //this.gMap = gMap;
-        //contr = new Controller();
+        contr = new Controller();
 
 
         /* Create collider box the same size as player sprite*/
@@ -75,205 +78,97 @@ public class PlayerEntity extends Entity
     public void update(float t)
     {
         System.out.println("HP: " + hp);
-        /* Update player animation based on delta time to keep it in synch with game*/
+        contr.move(position, (int) t);
 
-        //feetPos.setX(position.getX()+4.3125);
-        //feetPos.setY(position.getY()-13.0625);
-        /**
-         * Get player's input,set the appropriate animation and move character
-         * in the appropriate direction based on controller's calculation.
-         * (Eventually check for map collision to prevent movement)
-         */
-//        if (gc.getInput().isKeyDown(Input.KEY_RIGHT) && !(gc.getInput().isKeyDown(Input.KEY_RIGHT) && gc.getInput().isKeyDown(Input.KEY_UP)) && !(gc.getInput().isKeyDown(Input.KEY_RIGHT) && gc.getInput().isKeyDown(Input.KEY_DOWN)))
-//        {
-//            //if(position.getX() < 285.0)
-//
-//            //position.setX(position.getX() + t / 6.0);
-//            if (pMState != "MRIGHT")
-//            {
-//                pMState = "MRIGHT";
-//                pLDState = "R";
-//                setAnimation();
-//            }
-//
+        if (directionMoving != "R")
+        {
+            directionMoving = "R";
+            directionFacing = "R";
+            setAnimation(directionMoving);
+        }
+
 //            if (!isCollidingWorld() && position.getX() < 293.0)
 //            {
-//                position.setX(contr.getMovement(position, pMState, t));
+//                position.setX(contr.getMovement(position, directionMoving, t));
 //            }
 //            else
 //            {
 //                position.setX(position.getX() - 1);
 //            }
-//            //contr.moveEntity(this, pMState, t);
-//
-//        }
-//
-//        if (gc.getInput().isKeyDown(Input.KEY_LEFT) && !(gc.getInput().isKeyDown(Input.KEY_LEFT) && gc.getInput().isKeyDown(Input.KEY_UP)) && !(gc.getInput().isKeyDown(Input.KEY_LEFT) && gc.getInput().isKeyDown(Input.KEY_DOWN)))
-//        {
-//
-//            //if(position.getX() > 0.0)
-//            //position.setX(position.getX() - t / 6.0);
-//            if (pMState != "MLEFT")
-//            {
-//                pMState = ("MLEFT");
-//                pLDState = "L";
-//                setAnimation();
-//            }
-//
+        //contr.moveEntity(this, pMState, t);
+        if (Gdx.input.isKeyPressed(Keys.LEFT) && !(Gdx.input.isKeyPressed(Keys.LEFT) && Gdx.input.isKeyPressed(Keys.RIGHT)) && !(Gdx.input.isKeyPressed(Keys.LEFT) && Gdx.input.isKeyPressed(Keys.UP)) && !(Gdx.input.isKeyPressed(Keys.LEFT) && Gdx.input.isKeyPressed(Keys.DOWN)))
+        {
+
+            //if(position.getX() > 0.0)
+            //position.setX(position.getX() - t / 6.0);
+            if (directionMoving != "L")
+            {
+                directionMoving = "L";
+                directionFacing = "L";
+                setAnimation(directionMoving);
+            }
+
 //            if (!isCollidingWorld() && position.getX() > 0.0)
 //            {
-//                position.setX(contr.getMovement(position, pMState, t));
+//                position.setX(contr.getMovement(position, directionMoving, t));
 //            }
 //            else
 //            {
 //                position.setX(position.getX() + 1);
 //            }
-//
-//        }
-//
-//        if (gc.getInput().isKeyDown(Input.KEY_UP) && !(gc.getInput().isKeyDown(Input.KEY_LEFT) && gc.getInput().isKeyDown(Input.KEY_UP)) && !(gc.getInput().isKeyDown(Input.KEY_RIGHT) && gc.getInput().isKeyDown(Input.KEY_UP)))
-//        {
-//            //if(position.getY() < 300.0)
-//            //position.setY(position.getY() + t / 6.0);
-//            if (pMState != "MUP")
-//            {
-//                pMState = ("MUP");
-//                pLDState = "U";
-//                setAnimation();
-//            }
-//
+        }
+
+        if (Gdx.input.isKeyPressed(Keys.UP) && !(Gdx.input.isKeyPressed(Keys.UP) && Gdx.input.isKeyPressed(Keys.RIGHT)) && !(Gdx.input.isKeyPressed(Keys.UP) && Gdx.input.isKeyPressed(Keys.LEFT)) && !(Gdx.input.isKeyPressed(Keys.UP) && Gdx.input.isKeyPressed(Keys.DOWN)))
+        {
+            //if(position.getY() < 300.0)
+            //position.setY(position.getY() + t / 6.0);
+            if (directionMoving != "U")
+            {
+                directionMoving = ("U");
+                directionFacing = "U";
+                setAnimation(directionMoving);
+            }
+
 //            if (!isCollidingWorld() && position.getY() < 300.0)
 //            {
-//                position.setY(contr.getMovement(position, pMState, t));
+//                position.setY(contr.getMovement(position, directionMoving, t));
 //            }
 //            else
 //            {
 //                position.setY(position.getY() - 1);
 //            }
-//
-//        }
-//
-//        if (gc.getInput().isKeyDown(Input.KEY_DOWN) && !(gc.getInput().isKeyDown(Input.KEY_LEFT) && gc.getInput().isKeyDown(Input.KEY_DOWN)) && !(gc.getInput().isKeyDown(Input.KEY_RIGHT) && gc.getInput().isKeyDown(Input.KEY_DOWN)))
-//        {
-//
-//            if (pMState != "MDOWN")
-//            {
-//                pMState = ("MDOWN");
-//                pLDState = "D";
-//                setAnimation();
-//            }
+        }
+
+        if (Gdx.input.isKeyPressed(Keys.DOWN) && !(Gdx.input.isKeyPressed(Keys.DOWN) && Gdx.input.isKeyPressed(Keys.RIGHT)) && !(Gdx.input.isKeyPressed(Keys.DOWN) && Gdx.input.isKeyPressed(Keys.UP)) && !(Gdx.input.isKeyPressed(Keys.DOWN) && Gdx.input.isKeyPressed(Keys.LEFT)))
+        {
+
+            if (directionMoving != "D")
+            {
+                directionMoving = ("D");
+                directionFacing = "D";
+                setAnimation(directionMoving);
+            }
 //            if (!isCollidingWorld() && position.getY() > 14)
 //            {
-//                position.setY(contr.getMovement(position, pMState, t));
+//                position.setY(contr.getMovement(position, directionMoving, t));
 //            }
 //            else
 //            {
 //                position.setY(position.getY() + 1);
 //            }
-//
-//        }
-//
-//        if (!gc.getInput().isKeyDown(Input.KEY_LEFT) && !gc.getInput().isKeyDown(Input.KEY_RIGHT) && !gc.getInput().isKeyDown(Input.KEY_UP) && !gc.getInput().isKeyDown(Input.KEY_DOWN))
-//        {
-//            if (pMState != "IDLE")
-//            {
-//                pMState = ("IDLE");
-//                setAnimation();
-//            }
-//
-//        }
-//
-//        if ((gc.getInput().isKeyDown(Input.KEY_UP) && gc.getInput().isKeyDown(Input.KEY_LEFT)))
-//        {
-//
-//            if (pMState != "MULEFT")
-//            {
-//                pMState = ("MULEFT");
-//                pLDState = "U";
-//                setAnimation();
-//            }
-//
-//            if (!isCollidingWorld() && position.getY() < 300.0 && position.getX() > 0.0)
-//            {
-//                position.setX(contr.getMovementD(position, pMState, t, "LX"));
-//                position.setY(contr.getMovementD(position, pMState, t, "UY"));
-//            }
-//            else
-//            {
-//                position.setX(position.getX() + 1);
-//                position.setY(position.getY() - 1);
-//            }
-//
-//        }
-//
-//        if ((gc.getInput().isKeyDown(Input.KEY_DOWN) && gc.getInput().isKeyDown(Input.KEY_LEFT)) || (gc.getInput().isKeyDown(Input.KEY_LEFT) && gc.getInput().isKeyDown(Input.KEY_DOWN)))
-//        {
-//
-//            if (pMState != "MDLEFT")
-//            {
-//                pMState = ("MDLEFT");
-//                pLDState = "D";
-//                setAnimation();
-//            }
-//
-//            if (!isCollidingWorld() && position.getX() > 0.0 && position.getY() > 14.0)
-//            {
-//                position.setX(contr.getMovementD(position, pMState, t, "LX"));
-//                position.setY(contr.getMovementD(position, pMState, t, "DY"));
-//            }
-//            else
-//            {
-//                position.setX(position.getX() + 1);
-//                position.setY(position.getY() + 1);
-//            }
-//
-//        }
-//
-//        if ((gc.getInput().isKeyDown(Input.KEY_UP) && gc.getInput().isKeyDown(Input.KEY_RIGHT)))
-//        {
-//
-//            if (pMState != "MURIGHT")
-//            {
-//                pMState = ("MURIGHT");
-//                pLDState = "U";
-//                setAnimation();
-//            }
-//
-//            if (!isCollidingWorld() && position.getY() < 300.0 && position.getX() < 291.0)
-//            {
-//                position.setX(contr.getMovementD(position, pMState, t, "RX"));
-//                position.setY(contr.getMovementD(position, pMState, t, "UY"));
-//            }
-//            else
-//            {
-//                position.setX(position.getX() - 1);
-//                position.setY(position.getY() - 1);
-//            }
-//
-//        }
-//
-//        if (gc.getInput().isKeyDown(Input.KEY_DOWN) && gc.getInput().isKeyDown(Input.KEY_RIGHT))
-//        {
-//
-//            if (pMState != "MDRIGHT")
-//            {
-//                pMState = ("MDRIGHT");
-//                pLDState = "D";
-//                setAnimation();
-//            }
-//
-//            if (!isCollidingWorld() && position.getX() < 292 && position.getY() > 14.0)
-//            {
-//                position.setX(contr.getMovementD(position, pMState, t, "RX"));
-//                position.setY(contr.getMovementD(position, pMState, t, "DY"));
-//            }
-//            else
-//            {
-//                position.setX(position.getX() - 1);
-//                position.setY(position.getY() + 1);
-//            }
-//
-//        }
+
+        }
+
+        if (!Gdx.input.isKeyPressed(Keys.LEFT) && !Gdx.input.isKeyPressed(Keys.RIGHT) && !Gdx.input.isKeyPressed(Keys.UP) && !Gdx.input.isKeyPressed(Keys.DOWN))
+        {
+            if (directionMoving != "N")
+            {
+                directionMoving = ("N");
+                setAnimation(directionMoving);
+            }
+
+        }
+
     }
 
     public void takeDmg(int dmg)
@@ -304,10 +199,10 @@ public class PlayerEntity extends Entity
 //    }
 
     /* Set player's animation according to player current movement or direction state*/
-    public void setAnimation()
+    public void setAnimation(String newAnim)
     {
 
-        pAnim = animM.setPlayerAnimation();
+        animM.setPlayerAnimation(newAnim);
 
     }
 
