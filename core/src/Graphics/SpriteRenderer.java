@@ -18,6 +18,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import java.awt.Point;
 
 /**
@@ -35,19 +37,25 @@ public class SpriteRenderer
     private CoordinateTranslator corT;
     private BitmapFont font;
     private int pRotation;
+    private GameMap gMap;
+    private ShapeDrawer sDraw;
+    private ShapeRenderer shapRen;
 
-    public SpriteRenderer(EntityManager entM, CoordinateTranslator corT)
+    public SpriteRenderer(EntityManager entM, CoordinateTranslator corT, GameMap gMap)
     {
         sBatch = new SpriteBatch();
         this.entM = entM;
         this.corT = corT;
         stateTime = 0f;
         font = new BitmapFont();
-
+        this.gMap = gMap;
+        sDraw = new ShapeDrawer();
+        shapRen = new ShapeRenderer();
     }
 
     public void render()
     {
+
         stateTime += Gdx.graphics.getDeltaTime();
         for (Entity e : entM.getEnts())
         {
@@ -71,6 +79,7 @@ public class SpriteRenderer
                 renderPlayerEntity((PlayerEntity) e);
             }
         }
+
     }
 
     private void renderAgentEntity(AgentEntity a)
@@ -116,13 +125,13 @@ public class SpriteRenderer
         sBatch.begin();
 
         Point pScrPos = new Point(corT.worldToScreen(p.getPosition()));
-        font.setColor(Color.GREEN);
-        font.draw(sBatch, "HP: " + p.getHP(), pScrPos.x, pScrPos.y + 32);
         p.getCollider().updatePos(pScrPos);
+        sBatch.setColor(Color.YELLOW);
+
         switch (p.getDirMove())
         {
             case "R":
-                sBatch.draw(curFrame, pScrPos.x, pScrPos.y - 16, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, 180);
+                sBatch.draw(curFrame, pScrPos.x, pScrPos.y - 16, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, -180);
                 break;
             case "L":
                 sBatch.draw(curFrame, pScrPos.x, pScrPos.y - 16, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, 0);
@@ -134,6 +143,21 @@ public class SpriteRenderer
                 sBatch.draw(curFrame, pScrPos.x, pScrPos.y - 16, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, 90);
                 break;
         }
+
+        sBatch.end();
+        shapRen.begin(ShapeRenderer.ShapeType.Filled);
+        shapRen.setColor(Color.RED);
+        //shapRen.circle(pScrPos.x, pScrPos.y - 16, 1);
+        shapRen.end();
+        sBatch.begin();
+        sBatch.setColor(Color.GREEN);
+        Point colBox = new Point((int)p.getCollider().getHitBox().x,(int)p.getCollider().getHitBox().y);
+        for (Rectangle rect : gMap.getMapCollisions())
+        {
+            Point rectPos = new Point(corT.worldToScreen(rect.x, rect.y));
+            sDraw.drawRect((int) rect.x, (int) rect.y-16, (int) rect.width, (int) rect.height, 1, Color.RED);
+        }
+        //sDraw.drawRect(colBox.x, colBox.y-16, 32, 32, 1, Color.ORANGE);
         sBatch.end();
     }
 }

@@ -8,10 +8,9 @@ package Entity;
 import Components.Collider;
 import Components.Controller;
 import Graphics.AnimationManager;
+import Graphics.GameMap;
 import Math.CoordinateTranslator;
 import Math.Point2D;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Animation;
 
 /**
@@ -38,7 +37,7 @@ public class PlayerEntity extends Entity
     /* Player's collision box*/
     private Collider col;
     /* Game map, to be use for map collision in the future*/
-    //private GameMap gMap;
+    private GameMap gMap;
     private CoordinateTranslator corT;
     private int hp;
 
@@ -48,7 +47,7 @@ public class PlayerEntity extends Entity
      * @param x player entities starting x coordinate
      * @param y player entities starting y coordinate
      */
-    public PlayerEntity(double x, double y)
+    public PlayerEntity(double x, double y, GameMap gMap)
     {
 
         //startPos = new Point2D(x, y);
@@ -59,12 +58,11 @@ public class PlayerEntity extends Entity
         hp = 10;
         animM = new AnimationManager();
         pAnim = animM.setPlayerAnimation(directionMoving);
-        //this.gMap = gMap;
-        contr = new Controller();
-
-
+        this.gMap = gMap;
         /* Create collider box the same size as player sprite*/
         col = new Collider(position, 32, 32);
+        contr = new Controller(gMap.getMapCollisions(),col);
+        
 
     }
 
@@ -77,10 +75,14 @@ public class PlayerEntity extends Entity
     @Override
     public void update(float t)
     {
-        System.out.println("HP: " + hp);
-        contr.move(position, (int) t);
-        directionMoving = contr.lastKeyPressed();
 
+//        if (!col.checkWorldCollisions(col, gMap.getMapCollisions()))
+//        {
+            contr.move(position, (int) t);
+
+//        }
+        directionMoving = contr.lastKeyPressed();
+        System.out.println(position);
 //            if (!isCollidingWorld() && position.getX() < 293.0)
 //            {
 //                position.setX(contr.getMovement(position, directionMoving, t));
@@ -98,7 +100,6 @@ public class PlayerEntity extends Entity
 //            {
 //                position.setX(position.getX() + 1);
 //            }
-
 //            if (!isCollidingWorld() && position.getY() < 300.0)
 //            {
 //                position.setY(contr.getMovement(position, directionMoving, t));
@@ -107,7 +108,6 @@ public class PlayerEntity extends Entity
 //            {
 //                position.setY(position.getY() - 1);
 //            }
-
 //            if (!isCollidingWorld() && position.getY() > 14)
 //            {
 //                position.setY(contr.getMovement(position, directionMoving, t));
@@ -116,9 +116,6 @@ public class PlayerEntity extends Entity
 //            {
 //                position.setY(position.getY() + 1);
 //            }
-
-
-
     }
 
     public void takeDmg(int dmg)
@@ -191,7 +188,7 @@ public class PlayerEntity extends Entity
     {
         return hp;
     }
-    
+
     public String getDirMove()
     {
         return directionMoving;

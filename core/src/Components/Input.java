@@ -14,13 +14,6 @@ import com.badlogic.gdx.Input.Keys;
  */
 public class Input
 {
-
-    private int keyPressed;
-    
-    public Input()
-    {
-        keyPressed = 0;
-    }
     
     public String checkKeys()
     {
@@ -44,6 +37,5 @@ public class Input
         {
             return "NONE";
         }
-        
     }
 }

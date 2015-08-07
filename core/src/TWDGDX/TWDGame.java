@@ -34,7 +34,7 @@ public class TWDGame extends ApplicationAdapter
     private FPSLogger fLog;
     private TowerGUI tGUI;
     private Stage stage;
-    private SideMenuGUI sGUI;
+    //private SideMenuGUI sGUI;
     private PointManager pointM;
     private WaveManager waveM;
     private AgentEntityFactory aFactory;
@@ -60,18 +60,18 @@ public class TWDGame extends ApplicationAdapter
         pointM = new PointManager();
         pointM.addPoints(6);
 
-        player = new PlayerEntity(10, 73);
+        player = new PlayerEntity(40, 48,gMap);
         aFactory = new AgentEntityFactory(player, pointM);
         waveM = new WaveManager(aFactory, entM);
         //agent = new AgentEntity(70, -5.71, "Blinky",player,pointM);
         //entM.addEnt(agent);
         entM.addEnt(player);
-        corT1 = new CoordinateTranslator(Gdx.graphics.getWidth() - 112, Gdx.graphics.getHeight(), 100, 100, new Point2D(0, 0));
+        corT1 = new CoordinateTranslator(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 47, 50, new Point2D(0, 0));
         corT2 = new CoordinateTranslator(Gdx.graphics.getWidth() - 640, Gdx.graphics.getHeight(), 17.5, 100, new Point2D(-100, 0));
-        sRen = new SpriteRenderer(entM, corT1);
+        sRen = new SpriteRenderer(entM, corT1,gMap);
 
-        sGUI = new SideMenuGUI(corT2, pointM, waveM);
-        tGUI = new TowerGUI(gMap, corT1, entM, sGUI, pointM);
+        //sGUI = new SideMenuGUI(corT2, pointM, waveM);
+        //tGUI = new TowerGUI(gMap, corT1, entM, sGUI, pointM);
         gameStart = Gdx.audio.newSound(Gdx.files.internal("sound/startM.wav"));
         gameStart.play();
         pacDie = Gdx.audio.newSound(Gdx.files.internal("sound/pacDie.wav"));
@@ -90,9 +90,9 @@ public class TWDGame extends ApplicationAdapter
             //fLog.log();
             gMap.render();
 
-            tGUI.render();
+            //tGUI.render();
 
-            sGUI.render();
+            //sGUI.render();
             sRen.render();
 
             update();
@@ -114,7 +114,7 @@ public class TWDGame extends ApplicationAdapter
 
     public void update()
     {
-        tGUI.update(deltaTime);
+        //tGUI.update(deltaTime);
         waveM.update(deltaTime);
         if (waveM.getCurWave() >= 12)
         {

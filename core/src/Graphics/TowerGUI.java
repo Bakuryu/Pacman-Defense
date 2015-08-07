@@ -18,8 +18,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import java.awt.Point;
-import java.awt.Rectangle;
+
 
 /**
  *
@@ -125,7 +126,7 @@ public class TowerGUI
             for (Rectangle r : gMap.getFreeRect())
             {
 
-                sDraw.drawRect(r.x, r.y, r.width, r.height, 1, Color.WHITE);
+                sDraw.drawRect((int)r.x, (int)r.y, (int)r.width,(int) r.height, 1, Color.WHITE);
 
             }
 
@@ -316,7 +317,7 @@ public class TowerGUI
     {
         sBatch.begin();
         sBatch.setColor(Color.WHITE);
-        sDraw.drawRect(a.getCollider().getHitBox().x, a.getCollider().getHitBox().y, a.getCollider().getHitBox().width, a.getCollider().getHitBox().height, 2, Color.WHITE);
+        sDraw.drawRect((int)a.getCollider().getHitBox().x,(int) a.getCollider().getHitBox().y,(int) a.getCollider().getHitBox().width, (int)a.getCollider().getHitBox().height, 2, Color.WHITE);
         sBatch.end();
     }
 }

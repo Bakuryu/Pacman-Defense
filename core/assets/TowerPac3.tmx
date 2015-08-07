@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="61" height="64" tilewidth="16" tileheight="16" nextobjectid="50">
+ <tileset firstgid="1" name="PacMan" tilewidth="16" tileheight="16">
+  <image source="graphics/PacMan.png" width="160" height="160"/>
+  <tile id="0">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Walls" width="61" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+1biU7DMAw17OAYoHFsDCT4/89kFauUGfvFdpOuI7NksdLE8auT+Gg6J6LFnj8Of2vzLbu+CcqJ6rvc8xONS4+Z69r0RO1hXtMx5qs9Xxt45uyTtkeYe1nbA/PfkbF5H455tecHwvTA9Mz14e0RZq+siL6nwJy2LynL2md94J6sawvZzdu+pCxLH27nDR2vHYm7++9Kny3Ja1Fqb7knrW00tkVfbucWiNu5BeJ2LuGrIr5kqHxtHWyFPhyzZR/sqOSeNET+VPbtMTFH9+3W7WzxVR2nez/SaSP0nbH20pr3yN8KzP1maV/lzRlqt89Rq5h35M/Bl0AHKS5L5/OKtU+vc/OcjzdX9ENYPv8+BhOlcUyqg7af8H2HlGt+T6K0zZgxpNe/1coxxsSs2VmjknaeAmauZ7cmLXkVypO0uLGjU2FGc7t0fQvJn4qdLfPTQ1ze1DHfkewvUpLu3wP5U8Gs1beiOmk5QCn5kfcCqV9He1IJzEh+H09533HUpGgN5pxrN1Hda6/TyNxO421UuymBGcmPxNvRuW31zyUwI78wRV/1Sr/PvOeF8ptfvwH5JZ5phFC8PWYc9l8xn5udUX0b1d1QjeFUmK17WO265xTzqgtmO9XG3Pv1GvG2tb4drTHsCPs+LZ4a+13sFM7QjI25do0hRzXexXp9T66+bR3b6vukd3QWQnVMb/shdc+Ivq1i9taqebtzPDck1WE8NWbJH6FzO7lzQ+iMBG9vqa1L9SpLzHpq/6JRRK8o5rH9i0Yo/9Cow/xMZf2L1Y9ZfQuSjzBLY3djvpBuZ+temzvvESHPeRJNL21sFIe1iBn1j96zUs2xo3aO2sFKte38RXmfxv1m9CxTJJf0yNdy0FT2N7V5bmhoHe3cMVtzyXSu8rNMudqIpU6azklNPv82xZNLoncSpaj2nucZ/4K5Xu5QMpccOj7/jk7LC7Xvu3KxdOQbFGltSr4UMdcnkkv+J2oVc1oXl3hBcs1c+x+6h9oPZYvs/n3ED6kv7kEAPQAA
+  </data>
+ </layer>
+ <layer name="PlayerAreas" width="61" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAD4MUTG+qwA9AAA=
+  </data>
+ </layer>
+ <objectgroup name="Level Boundries">
+  <object id="2" x="1" y="272" width="223" height="160"/>
+  <object id="4" x="752" y="464" width="223" height="160"/>
+  <object id="5" x="0" y="464" width="223" height="160"/>
+  <object id="6" x="752" y="272" width="223" height="160"/>
+  <object id="7" x="864" y="768" width="112" height="96"/>
+  <object id="8" x="0" y="768" width="112" height="96"/>
+  <object id="9" x="48" y="48" width="176" height="80"/>
+  <object id="10" x="256" y="48" width="160" height="80"/>
+  <object id="11" x="560" y="48" width="160" height="80"/>
+  <object id="12" x="752" y="48" width="176" height="80"/>
+  <object id="13" x="752" y="160" width="176" height="80"/>
+  <object id="14" x="48" y="160" width="176" height="80"/>
+  <object id="15" x="256" y="656" width="160" height="80"/>
+  <object id="16" x="560" y="656" width="160" height="80"/>
+  <object id="17" x="368" y="544" width="240" height="80"/>
+  <object id="18" x="448" y="624" width="80" height="112"/>
+  <object id="19" x="368" y="768" width="240" height="96"/>
+  <object id="20" x="752" y="656" width="176" height="80"/>
+  <object id="21" x="48" y="656" width="176" height="80"/>
+  <object id="22" x="48" y="896" width="368" height="80"/>
+  <object id="23" x="560" y="896" width="368" height="80"/>
+  <object id="24" x="368" y="160" width="240" height="80"/>
+  <object id="25" x="560" y="272" width="80" height="80"/>
+  <object id="26" x="336" y="272" width="80" height="80"/>
+  <object id="27" x="448" y="240" width="80" height="112"/>
+  <object id="28" x="256" y="160" width="80" height="272"/>
+  <object id="29" x="640" y="160" width="80" height="272"/>
+  <object id="30" x="640" y="464" width="80" height="160"/>
+  <object id="31" x="256" y="464" width="80" height="160"/>
+  <object id="32" x="144" y="736" width="80" height="128"/>
+  <object id="33" x="640" y="768" width="80" height="128"/>
+  <object id="34" x="256" y="768" width="80" height="128"/>
+  <object id="35" x="752" y="736" width="80" height="128"/>
+  <object id="36" x="448" y="16" width="80" height="112"/>
+  <object id="37" x="0" y="16" width="16" height="256"/>
+  <object id="38" x="960" y="16" width="16" height="256"/>
+  <object id="39" x="960" y="624" width="16" height="144"/>
+  <object id="40" x="0" y="624" width="16" height="144"/>
+  <object id="41" x="0" y="864" width="16" height="144"/>
+  <object id="42" x="960" y="864" width="16" height="144"/>
+  <object id="43" x="0" y="0" width="976" height="16"/>
+  <object id="44" x="0" y="1008" width="976" height="16"/>
+  <object id="45" x="592" y="384" width="16" height="128"/>
+  <object id="46" x="368" y="384" width="16" height="128"/>
+  <object id="47" x="384" y="384" width="80" height="16"/>
+  <object id="48" x="512" y="384" width="80" height="16"/>
+  <object id="49" x="384" y="496" width="208" height="16"/>
+ </objectgroup>
+</map>
