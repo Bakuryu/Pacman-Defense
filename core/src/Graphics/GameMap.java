@@ -6,7 +6,6 @@
 package Graphics;
 
 import Math.Point2D;
-import Math.TileConverter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -17,8 +16,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -56,7 +53,7 @@ public class GameMap
         cam = new OrthographicCamera();
         cam.setToOrtho(false, w, h);
         cam.update();
-        map = new TmxMapLoader().load("TowerPac4.tmx");
+        map = new TmxMapLoader().load("TowerPac6.tmx");
         tRenderer = new OrthogonalTiledMapRenderer(map);
         mapProp = map.getProperties();
         mapLayer = map.getLayers();

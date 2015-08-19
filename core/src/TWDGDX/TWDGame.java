@@ -27,7 +27,10 @@ public class TWDGame extends ApplicationAdapter
 
     private GameMap gMap;
     private EntityManager entM;
-    private AgentEntity agent;
+    private AgentEntity agentB;
+    private AgentEntity agentI;
+    private AgentEntity agentP;
+    private AgentEntity agentC;
     private PlayerEntity player;
     private float deltaTime;
     private SpriteRenderer sRen;
@@ -60,13 +63,22 @@ public class TWDGame extends ApplicationAdapter
         pointM = new PointManager();
         pointM.addPoints(6);
 
-        player = new PlayerEntity(40, 48,gMap);
-        aFactory = new AgentEntityFactory(player, pointM);
-        waveM = new WaveManager(aFactory, entM);
-        //agent = new AgentEntity(70, -5.71, "Blinky",player,pointM);
-        //entM.addEnt(agent);
+        
+//        aFactory = new AgentEntityFactory(player, pointM);
+//       waveM = new WaveManager(aFactory, entM);
+        
+        agentB = new AgentEntity(29.5, 26, "Blinky",player,pointM);
+        agentI = new AgentEntity(24, 21, "Inky",player,pointM);
+        agentP = new AgentEntity(29.5, 21, "Pinky",player,pointM);
+        agentC = new AgentEntity(35, 21, "Clyde",player,pointM);
+        player = new PlayerEntity(29.5, 16,gMap);
         entM.addEnt(player);
-        corT1 = new CoordinateTranslator(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 47, 50, new Point2D(0, 0));
+        entM.addEnt(agentB);
+        entM.addEnt(agentI);
+        entM.addEnt(agentP);
+        entM.addEnt(agentC);
+        
+        corT1 = new CoordinateTranslator(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()-100, 61, 42, new Point2D(0, 0));
         corT2 = new CoordinateTranslator(Gdx.graphics.getWidth() - 640, Gdx.graphics.getHeight(), 17.5, 100, new Point2D(-100, 0));
         sRen = new SpriteRenderer(entM, corT1,gMap);
 
@@ -114,18 +126,18 @@ public class TWDGame extends ApplicationAdapter
 
     public void update()
     {
-        //tGUI.update(deltaTime);
-        waveM.update(deltaTime);
-        if (waveM.getCurWave() >= 12)
-        {
-            isGameWon = true;
-        }
+//        tGUI.update(deltaTime);
+//        waveM.update(deltaTime);
+//        if (waveM.getCurWave() >= 12)
+//        {
+//            isGameWon = true;
+//        }
         entM.updateEnts(deltaTime);
-        if (player.getHP() <= 0)
-        {
-            pacDie.play();
-            isGameOver = true;
-        }
+//        if (player.getHP() <= 0)
+//        {
+//            pacDie.play();
+//            isGameOver = true;
+//        }
 
     }
 }

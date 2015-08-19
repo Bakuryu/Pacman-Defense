@@ -30,7 +30,8 @@ public class SpriteRenderer
 {
 
     private EntityManager entM;
-    private Animation anim;
+    private Animation aAnim;
+    private Animation pAnim;
     private TextureRegion curFrame;
     private SpriteBatch sBatch;
     private float stateTime;
@@ -78,6 +79,7 @@ public class SpriteRenderer
             {
                 renderPlayerEntity((PlayerEntity) e);
             }
+            renderDebug();
         }
 
     }
@@ -86,13 +88,14 @@ public class SpriteRenderer
     {
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-        anim = a.getAnimation();
-        curFrame = anim.getKeyFrame(stateTime, true);
+        aAnim = a.getAnimation();
+        curFrame = aAnim.getKeyFrame(stateTime, true);
         sBatch.begin();
         Point aScrPos = new Point(corT.worldToScreen(a.getPosition()));
         a.getCollider().updatePos(aScrPos);
-        sBatch.draw(curFrame, (float) aScrPos.getX(), (float) aScrPos.getY());
+        sBatch.draw(curFrame, (float) aScrPos.getX(), (float) aScrPos.getY() - 16);
         sBatch.end();
+
     }
 
     private void renderTowerEntity(TowerEntity t)
@@ -119,14 +122,12 @@ public class SpriteRenderer
 
     private void renderPlayerEntity(PlayerEntity p)
     {
-
-        anim = p.getAnimation();
-        curFrame = anim.getKeyFrame(stateTime, true);
+        pAnim = p.getAnimation();
+        curFrame = pAnim.getKeyFrame(stateTime, true);
         sBatch.begin();
 
         Point pScrPos = new Point(corT.worldToScreen(p.getPosition()));
         p.getCollider().updatePos(pScrPos);
-        sBatch.setColor(Color.YELLOW);
 
         switch (p.getDirMove())
         {
@@ -143,21 +144,58 @@ public class SpriteRenderer
                 sBatch.draw(curFrame, pScrPos.x, pScrPos.y - 16, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, 90);
                 break;
         }
-
         sBatch.end();
-        shapRen.begin(ShapeRenderer.ShapeType.Filled);
-        shapRen.setColor(Color.RED);
-        //shapRen.circle(pScrPos.x, pScrPos.y - 16, 1);
-        shapRen.end();
+
+    }
+
+    private void renderDebug()
+    {
+
+        //Player Debug Visuals
+        PlayerEntity p = (PlayerEntity) entM.getEnts().get(0);
+
+        Rectangle pRBox = new Rectangle(p.getCollider().getHitBox().x + 16, p.getCollider().getHitBox().y + 3, p.getCollider().getHitBox().width, p.getCollider().getHitBox().height - 6);
+        Rectangle pLBox = new Rectangle(p.getCollider().getHitBox().x - 16, p.getCollider().getHitBox().y + 3, p.getCollider().getHitBox().width, p.getCollider().getHitBox().height - 6);
+        Rectangle pUBox = new Rectangle(p.getCollider().getHitBox().x + 3, p.getCollider().getHitBox().y + 16, p.getCollider().getHitBox().width - 6, p.getCollider().getHitBox().height);
+        Rectangle pDBox = new Rectangle(p.getCollider().getHitBox().x + 3, p.getCollider().getHitBox().y - 16, p.getCollider().getHitBox().width - 6, p.getCollider().getHitBox().height);
+
         sBatch.begin();
-        sBatch.setColor(Color.GREEN);
-        Point colBox = new Point((int)p.getCollider().getHitBox().x,(int)p.getCollider().getHitBox().y);
+        sDraw.drawRect((int) p.getCollider().getHitBox().x, (int) p.getCollider().getHitBox().y - 16, (int) p.getCollider().getHitBox().width, (int) p.getCollider().getHitBox().height, 1, Color.WHITE);
         for (Rectangle rect : gMap.getMapCollisions())
         {
-            Point rectPos = new Point(corT.worldToScreen(rect.x, rect.y));
-            sDraw.drawRect((int) rect.x, (int) rect.y-16, (int) rect.width, (int) rect.height, 1, Color.RED);
+            sDraw.drawRect((int) rect.x, (int) rect.y - 16, (int) rect.width, (int) rect.height, 1, Color.RED);
         }
-        //sDraw.drawRect(colBox.x, colBox.y-16, 32, 32, 1, Color.ORANGE);
+
+        sDraw.drawRect((int) pRBox.x, (int) pRBox.y - 16, (int) pRBox.width, (int) pRBox.height, 1, Color.ORANGE);
+        sDraw.drawRect((int) pLBox.x, (int) pLBox.y - 16, (int) pLBox.width, (int) pLBox.height, 1, Color.ORANGE);
+        sDraw.drawRect((int) pUBox.x, (int) pUBox.y - 16, (int) pUBox.width, (int) pUBox.height, 1, Color.ORANGE);
+        sDraw.drawRect((int) pDBox.x, (int) pDBox.y - 16, (int) pDBox.width, (int) pDBox.height, 1, Color.ORANGE);
+
+        sBatch.end();
+
+        //Agent Debug Visuals
+//        Rectangle aRBox = new Rectangle();
+//        Rectangle aLBox = new Rectangle();
+//        Rectangle aUBox = new Rectangle();
+//        Rectangle aDBox = new Rectangle();
+        sBatch.begin();
+        for (int i = 1; i < entM.getEnts().size(); i++)
+        {
+            AgentEntity a = (AgentEntity) entM.getEnts().get(i);
+            Rectangle aRBox = new Rectangle(a.getCollider().getHitBox().x + 16, a.getCollider().getHitBox().y + 3, a.getCollider().getHitBox().width, a.getCollider().getHitBox().height - 6);
+            Rectangle aLBox = new Rectangle(a.getCollider().getHitBox().x - 16, a.getCollider().getHitBox().y + 3, a.getCollider().getHitBox().width, a.getCollider().getHitBox().height - 6);
+            Rectangle aUBox = new Rectangle(a.getCollider().getHitBox().x + 3, a.getCollider().getHitBox().y + 16, a.getCollider().getHitBox().width - 6, a.getCollider().getHitBox().height);
+            Rectangle aDBox = new Rectangle(a.getCollider().getHitBox().x + 3, a.getCollider().getHitBox().y - 16, a.getCollider().getHitBox().width - 6, a.getCollider().getHitBox().height);
+
+            sDraw.drawRect((int) a.getCollider().getHitBox().x, (int) a.getCollider().getHitBox().y - 16, (int) a.getCollider().getHitBox().width, (int) a.getCollider().getHitBox().height, 1, Color.WHITE);
+
+            sDraw.drawRect((int) aRBox.x, (int) aRBox.y - 16, (int) aRBox.width, (int) aRBox.height, 1, Color.ORANGE);
+            sDraw.drawRect((int) aLBox.x, (int) aLBox.y - 16, (int) aLBox.width, (int) aLBox.height, 1, Color.ORANGE);
+            sDraw.drawRect((int) aUBox.x, (int) aUBox.y - 16, (int) aUBox.width, (int) aUBox.height, 1, Color.ORANGE);
+            sDraw.drawRect((int) aDBox.x, (int) aDBox.y - 16, (int) aDBox.width, (int) aDBox.height, 1, Color.ORANGE);
+
+        }
         sBatch.end();
     }
+
 }

@@ -61,13 +61,14 @@ public class AgentEntity extends Entity
         enemyType = type;
         animM = new AnimationManager();
         hitBox = new Collider(position, 30, 29);
-        path = new LinkedList<Point2D>();
-        backtrack = new LinkedList<Point2D>();
+        path = new LinkedList<>();
+        backtrack = new LinkedList<>();
         isBacktracking = false;
         startScaredTimer = false;
         scaredCoolDown = 5;
         wasKilled = false;
         hasDied = false;
+        createAgent();
 
     }
 
@@ -81,6 +82,7 @@ public class AgentEntity extends Entity
     @Override
     public void update(float t)
     {
+
         //System.out.println("Position: " + position);
         centerPos.set(new Point2D(position.getX() + 1, position.getY() + 4));
         if (isBacktracking)
@@ -111,11 +113,11 @@ public class AgentEntity extends Entity
             position.set(newPos);
         }
 
-        if (isCollidingPlayer())
-        {
-            Die();
-            return;
-        }
+//        if (isCollidingPlayer())
+//        {
+//            Die();
+//            return;
+//        }
         if (isBacktracking && !backtrack.isEmpty() && !isAgentNear(this, backtrack.getFirst()))
         {
             Vector2D dist = backtrack.getFirst().minus(this.position);
@@ -280,5 +282,37 @@ public class AgentEntity extends Entity
         isBacktracking = b;
         startScaredTimer = true;
         scaredStart = System.currentTimeMillis();
+    }
+
+    private void createAgent()
+    {
+        switch (enemyType)
+        {
+            case "Blinky":
+                setAnimation(animM.setAgentAnimation(enemyType));
+                setSpeed(20);
+                setHP(4);
+                setDmg(2);
+                break;
+            case "Inky":
+                setAnimation(animM.setAgentAnimation(enemyType));
+                setSpeed(15);
+                setHP(7);
+                setDmg(4);
+                break;
+            case "Pinky":
+                setAnimation(animM.setAgentAnimation(enemyType));
+                setSpeed(35);
+                setHP(3);
+                setDmg(1);
+                break;
+            case "Clyde":
+                setAnimation(animM.setAgentAnimation(enemyType));
+                setSpeed(25);
+                setHP(5);
+                setDmg(3);
+                break;
+
+        }
     }
 }

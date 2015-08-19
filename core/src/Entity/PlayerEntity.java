@@ -12,6 +12,7 @@ import Graphics.GameMap;
 import Math.CoordinateTranslator;
 import Math.Point2D;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.math.Rectangle;
 
 /**
  *
@@ -165,6 +166,10 @@ public class PlayerEntity extends Entity
         return col;
     }
 
+public Rectangle getPCB()
+    {
+        return contr.getPreColBox();
+    }
     /* Reset players position to it's starting position (Used by AgentEntity)*/
 //    public void resetPos()
 //    {

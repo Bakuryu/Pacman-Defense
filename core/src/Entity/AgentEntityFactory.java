@@ -38,7 +38,7 @@ public class AgentEntityFactory
         hp = 0;
         speed = 0;
         dmg = 0;
-        waveList = new LinkedList<AgentEntity>();
+        waveList = new LinkedList<>();
 
     }
 
@@ -49,7 +49,7 @@ public class AgentEntityFactory
 
     private LinkedList<Point2D> generatePath()
     {
-        LinkedList<Point2D> path = new LinkedList<Point2D>();
+        LinkedList<Point2D> path = new LinkedList<>();
         path.add(new Point2D(70, 3));
         path.add(new Point2D(93, 3));
         path.add(new Point2D(93, 31.43));

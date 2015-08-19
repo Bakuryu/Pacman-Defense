@@ -30,8 +30,8 @@ public class EntityManager
         e = new ArrayList();
         addED = false;
         removeED = false;
-        delayAEnts = new Stack<Entity>();
-        delayREnts = new Stack<Entity>();
+        delayAEnts = new Stack<>();
+        delayREnts = new Stack<>();
     }
 
     /**

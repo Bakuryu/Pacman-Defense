@@ -29,7 +29,7 @@ public class WaveManager
 
     public WaveManager(AgentEntityFactory aFact, EntityManager entM)
     {
-        curWave = new LinkedList<AgentEntity>();
+        curWave = new LinkedList<>();
         spwnCoolD = 3;
         this.entM = entM;
         this.aFact = aFact;

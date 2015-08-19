@@ -49,7 +49,7 @@ public class AnimationManager
         inky = new Texture("graphics/InkyAnim2.png");
         pinky = new Texture("graphics/PinkyAnim2.png");
         clyde = new Texture("graphics/ClydeAnim2.png");
-        pacman = new Texture("graphics/PacmanAnim.png");
+        pacman = new Texture("graphics/PacManAnim.png");
         scared = new Texture("graphics/BlueGhostAnim.png");
         curPAnim = "IDLE";
 
