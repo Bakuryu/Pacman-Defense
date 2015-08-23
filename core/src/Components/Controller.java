@@ -24,19 +24,16 @@ public class Controller
     private boolean lCollision;
     private boolean uCollision;
     private boolean dCollision;
-    private boolean rBlocked;
-    private boolean lBlocked;
-    private boolean uBlocked;
-    private boolean dBlocked;
     private String prevKey;
     private Rectangle predictColBox;
+    private PreCollider preCol;
     //private Rectangle rBox;
     //private Rectangle lBox;
     //private Rectangle uBox;
     //private Rectangle dBox;
 
     //private Point2D movementP;
-    public Controller(ArrayList<Rectangle> collisions, Collider pCol)
+    public Controller(ArrayList<Rectangle> collisions, Collider pCol, PreCollider preCol)
     {
         input = new Input();
         keyPressed = "L";
@@ -47,6 +44,7 @@ public class Controller
         this.pCol = pCol;
         prevKey = "N";
         predictColBox = new Rectangle();
+        this.preCol = preCol;
         //Rectangle rBox = new Rectangle();
         //Rectangle lBox = new Rectangle();
         //Rectangle uBox = new Rectangle();
@@ -66,12 +64,13 @@ public class Controller
         System.out.println("lCollision: " + lCollision);
         System.out.println("uCollision: " + uCollision);
         System.out.println("dCollision: " + dCollision);
-        System.out.println("rBlocked: " + rBlocked);
-        System.out.println("lBlocked: " + lBlocked);
-        System.out.println("uBlocked: " + uBlocked);
-        System.out.println("dBlocked: " + dBlocked);
+//        System.out.println("rBlocked: " + rBlocked);
+//        System.out.println("lBlocked: " + lBlocked);
+//        System.out.println("uBlocked: " + uBlocked);
+//        System.out.println("dBlocked: " + dBlocked);
         keyPressed = input.checkKeys();
-        checkProximity();
+        preCol.update();
+        //checkProximity();
 //        if (checkForCollision("R"))
 //        {
 //            rBlocked = true;
@@ -82,7 +81,7 @@ public class Controller
             case "RIGHT":
                 //if (!checkForCollision("R"))
 
-                if (!rBlocked)
+                if (!preCol.isRBlocked())//rBlocked)
                 {
                     dirKeyPressed = "R";
                     rCollision = false;
@@ -91,7 +90,7 @@ public class Controller
                 break;
             case "LEFT":
                 //if (!checkForCollision("L"))
-                if (!lBlocked)
+                if (!preCol.isLBlocked())//lBlocked)
                 {
                     dirKeyPressed = "L";
                     lCollision = false;
@@ -100,7 +99,7 @@ public class Controller
                 break;
             case "UP":
                 //if (!checkForCollision("U"))
-                if (!uBlocked)
+                if (!preCol.isUBlocked())//uBlocked)
                 {
                     dirKeyPressed = "U";
                     uCollision = false;
@@ -110,7 +109,7 @@ public class Controller
             case "DOWN":
 
                 //if (!checkForCollision("D"))
-                if (!dBlocked)
+                if (!preCol.isDBlocked())//dBlocked)
                 {
                     dirKeyPressed = "D";
                     dCollision = false;
@@ -129,7 +128,7 @@ public class Controller
                 //case "RIGHT":
                 if (!rCollision)
                 {
-                    if (checkForCollision("N"))
+                    if (checkForCollision())
                     {
                         if (!lCollision)
                         {
@@ -151,7 +150,7 @@ public class Controller
                 //case "LEFT":
                 if (!lCollision)
                 {
-                    if (checkForCollision("N"))
+                    if (checkForCollision())
                     {
                         if (!rCollision)
                         {
@@ -173,7 +172,7 @@ public class Controller
                 //case "UP":
                 if (!uCollision)
                 {
-                    if (checkForCollision("N"))
+                    if (checkForCollision())
                     {
                         if (!dCollision)
                         {
@@ -194,7 +193,7 @@ public class Controller
                 //case "DOWN":
                 if (!dCollision)
                 {
-                    if (checkForCollision("N"))
+                    if (checkForCollision())
                     {
                         if (!uCollision)
                         {
@@ -219,26 +218,11 @@ public class Controller
         return dirKeyPressed;
     }
 
-    private boolean checkForCollision(String dir)
+    private boolean checkForCollision()
     {
 
-        switch (dir)
-        {
-//            case "R":
-//                predictColBox = new Rectangle(pCol.hBox.x + 16, pCol.hBox.y, pCol.hitBoxW, pCol.hitBoxH);
-//                break;
-//            case "L":
-//                predictColBox = new Rectangle(pCol.hBox.x - 16, pCol.hBox.y, pCol.hitBoxW, pCol.hitBoxH);
-//                break;
-//            case "U":
-//                predictColBox = new Rectangle(pCol.hBox.x, pCol.hBox.y + 16, pCol.hitBoxW, pCol.hitBoxH);
-//                break;
-//            case "D":
-//                predictColBox = new Rectangle(pCol.hBox.x, pCol.hBox.y - 16, pCol.hitBoxW, pCol.hitBoxH);
-//                break;
-            case "N":
-                predictColBox = new Rectangle(pCol.hBox.x, pCol.hBox.y, pCol.hitBoxW, pCol.hitBoxH);
-        }
+        predictColBox = new Rectangle(pCol.hBox.x, pCol.hBox.y, pCol.hitBoxW, pCol.hitBoxH);
+
         boolean collided = false;
         for (Rectangle rect : mapCollisionBoxes)
         {
@@ -249,40 +233,6 @@ public class Controller
             }
         }
         return collided;
-    }
-
-    private void checkProximity()
-    {
-        Rectangle rBox = new Rectangle(pCol.hBox.x + 16, pCol.hBox.y + 3, pCol.hitBoxW, pCol.hitBoxH - 6);
-        Rectangle lBox = new Rectangle(pCol.hBox.x - 16, pCol.hBox.y + 3, pCol.hitBoxW, pCol.hitBoxH - 6);
-        Rectangle uBox = new Rectangle(pCol.hBox.x + 3, pCol.hBox.y + 16, pCol.hitBoxW - 6, pCol.hitBoxH);
-        Rectangle dBox = new Rectangle(pCol.hBox.x + 3, pCol.hBox.y - 16, pCol.hitBoxW - 6, pCol.hitBoxH);
-        rBlocked = false;
-        lBlocked = false;
-        uBlocked = false;
-        dBlocked = false;
-        for (Rectangle rect : mapCollisionBoxes)
-        {
-            if (rBox.overlaps(rect))
-            {
-                rBlocked = true;
-            }
-
-            if (lBox.overlaps(rect))
-            {
-                lBlocked = true;
-            }
-
-            if (uBox.overlaps(rect))
-            {
-                uBlocked = true;
-            }
-
-            if (dBox.overlaps(rect))
-            {
-                dBlocked = true;
-            }
-        }
     }
 
     public Rectangle getPreColBox()

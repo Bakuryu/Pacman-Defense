@@ -5,8 +5,12 @@
  */
 package Entity;
 
+import AgentStates.AgentChase;
 import Components.Collider;
+import Components.PreCollider;
 import Graphics.AnimationManager;
+import Graphics.GameMap;
+import Math.NavGraph;
 import Math.Point2D;
 import Math.PointManager;
 import Math.Vector2D;
@@ -28,7 +32,6 @@ public class AgentEntity extends Entity
     private int dmg;
     private LinkedList<Point2D> path;
     private LinkedList<Point2D> backtrack;
-    private Point2D currentTargetP;
     private boolean isBacktracking;
     private Point2D centerPos;
     private Collider hitBox;
@@ -40,6 +43,12 @@ public class AgentEntity extends Entity
     private int scaredCoolDown;
     private boolean hasDied;
     private boolean wasKilled;
+    private String dir;
+    private PreCollider preCol;
+    private EntityState aCurState;
+    private Point2D target;
+    private GameMap gMap;
+    private NavGraph navGraph;
 
     /**
      * Create an AgentEntity at location (x,y).
@@ -50,24 +59,28 @@ public class AgentEntity extends Entity
      * @param p
      * @param pM
      */
-    public AgentEntity(double x, double y, String type, PlayerEntity p, PointManager pM)
+    public AgentEntity(double x, double y, String type, PlayerEntity p, PointManager pM, GameMap gMap)
     {
+        this.gMap = gMap;
+        navGraph = new NavGraph(gMap);
+        
         pointM = pM;
         this.p = p;
         isAlive = true;
-        currentTargetP = new Point2D();
+
         position = new Point2D(x, y);
         centerPos = new Point2D(x + 2, y + 4);
         enemyType = type;
         animM = new AnimationManager();
         hitBox = new Collider(position, 30, 29);
         path = new LinkedList<>();
-        backtrack = new LinkedList<>();
-        isBacktracking = false;
         startScaredTimer = false;
         scaredCoolDown = 5;
         wasKilled = false;
         hasDied = false;
+        dir = "L";
+        preCol = new PreCollider(hitBox);
+        target = new Point2D();
         createAgent();
 
     }
@@ -82,82 +95,32 @@ public class AgentEntity extends Entity
     @Override
     public void update(float t)
     {
-
-        //System.out.println("Position: " + position);
-        centerPos.set(new Point2D(position.getX() + 1, position.getY() + 4));
-        if (isBacktracking)
+        
+        if (aCurState != null)
         {
-            anim = animM.setAgentAnimation("Scared");
-            long counter;
-            counter = System.currentTimeMillis() - scaredStart;
-            if (counter >= scaredCoolDown * 1000)
-            {
-                isBacktracking = false;
-            }
+            aCurState.Execute(this, (int)t); //May change Entity state to float deltatime 
         }
 
-        if (!isBacktracking)
+        if (enemyType == "Blinky" && aCurState instanceof AgentChase)
         {
-            anim = animM.setAgentAnimation(enemyType);
-        }
-        if (!isBacktracking && !path.isEmpty() && !(isAgentNear(this, path.getFirst())))
-        {
-            Vector2D dist = path.getFirst().minus(this.position);
-            dist.normalize();
-
-            double nX = position.getX() + dist.getX() * speed * t / 1000;
-            double nY = position.getY() + dist.getY() * speed * t / 1000;
-
-            Point2D newPos = new Point2D(nX, nY);
-
-            position.set(newPos);
+            target = p.position;
         }
 
-//        if (isCollidingPlayer())
-//        {
-//            Die();
-//            return;
-//        }
-        if (isBacktracking && !backtrack.isEmpty() && !isAgentNear(this, backtrack.getFirst()))
-        {
-            Vector2D dist = backtrack.getFirst().minus(this.position);
-            dist.normalize();
 
-            double nX = position.getX() + dist.getX() * speed * t / 1000;
-            double nY = position.getY() + dist.getY() * speed * t / 1000;
-            Point2D newPos = new Point2D(nX, nY);
-            position.set(newPos);
-        }
+    }
 
-//        if (isBacktracking)
-//        {
-//
-//        }
-        if (!isBacktracking && !path.isEmpty() && isAgentNear(this, path.getFirst()))
-        {
-            // System.out.println("Position:" + position);
-            backtrack.addFirst(path.getFirst());
-            path.remove();
-        }
-
-        if (isBacktracking && !backtrack.isEmpty() && isAgentNear(this, backtrack.getFirst()))
-        {
-            // System.out.println("Position:" + position);
-            path.addFirst(backtrack.getFirst());
-            backtrack.remove();
-        }
-
-        if (isBacktracking && backtrack.isEmpty())
-        {
-            isBacktracking = false;
-            //Collections.reverse(path);
-        }
-
-//        if (!isBacktracking && path.isEmpty())
-//        {
-//            isBacktracking = true;
-//            //Collections.reverse(backtrack);
-//        }
+    /**
+     * Change the current state to nState, do current state's Exit method first,
+     * then change state to nState, then do nState's Enter method.
+     *
+     * @param nState New state being changed to
+     * @param t delta time
+     */
+    public void ChangeState(EntityState<AgentEntity> nState, int t)
+    {
+        aCurState.Exit(this, t);
+        aCurState = nState;
+        aCurState.Enter(this, t);
     }
 
     public void setAnimation(Animation a)
@@ -242,8 +205,6 @@ public class AgentEntity extends Entity
     public void Die()
     {
         hasDied = true;
-        p.takeDmg(dmg);
-        takeDmg(hp);
 
     }
 
@@ -283,31 +244,41 @@ public class AgentEntity extends Entity
         startScaredTimer = true;
         scaredStart = System.currentTimeMillis();
     }
+    
+    public PreCollider getPreCol()
+    {
+        return preCol;
+    }
+    
+    public Point2D getTarget()
+    {
+        return target;
+    }
 
     private void createAgent()
     {
         switch (enemyType)
         {
             case "Blinky":
-                setAnimation(animM.setAgentAnimation(enemyType));
+                setAnimation(animM.setAgentAnimation(enemyType, dir));
                 setSpeed(20);
                 setHP(4);
                 setDmg(2);
                 break;
             case "Inky":
-                setAnimation(animM.setAgentAnimation(enemyType));
+                setAnimation(animM.setAgentAnimation(enemyType, dir));
                 setSpeed(15);
                 setHP(7);
                 setDmg(4);
                 break;
             case "Pinky":
-                setAnimation(animM.setAgentAnimation(enemyType));
+                setAnimation(animM.setAgentAnimation(enemyType, dir));
                 setSpeed(35);
                 setHP(3);
                 setDmg(1);
                 break;
             case "Clyde":
-                setAnimation(animM.setAgentAnimation(enemyType));
+                setAnimation(animM.setAgentAnimation(enemyType, dir));
                 setSpeed(25);
                 setHP(5);
                 setDmg(3);

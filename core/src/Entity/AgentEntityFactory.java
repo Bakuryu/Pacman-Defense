@@ -28,6 +28,7 @@ public class AgentEntityFactory
     private PlayerEntity p;
     private PointManager pointM;
     private Random ran;
+    private String dir;
 
     public AgentEntityFactory(PlayerEntity p, PointManager pM)
     {
@@ -39,6 +40,7 @@ public class AgentEntityFactory
         speed = 0;
         dmg = 0;
         waveList = new LinkedList<>();
+        dir = "N";
 
     }
 
@@ -174,42 +176,42 @@ public class AgentEntityFactory
         AgentEntity agent = null;
         if (num == 1)
         {
-            agent = new AgentEntity(70, -5.71, "Blinky", p, pointM);
-            agent.setAnimation(animM.setAgentAnimation("Blinky"));
-            agent.setSpeed(20);
-            agent.setHP(4);
-            agent.setDmg(2);
-            agent.setPath(generatePath());
+//            agent = new AgentEntity(70, -5.71, "Blinky", p, pointM);
+//            agent.setAnimation(animM.setAgentAnimation("Blinky",dir));
+//            agent.setSpeed(20);
+//            agent.setHP(4);
+//            agent.setDmg(2);
+//            agent.setPath(generatePath());
         }
 
         if (num == 2)
         {
-            agent = new AgentEntity(70, -5.71, "Inky", p, pointM);
-            agent.setAnimation(animM.setAgentAnimation("Inky"));
-            agent.setSpeed(15);
-            agent.setHP(7);
-            agent.setDmg(4);
-            agent.setPath(generatePath());
+//            agent = new AgentEntity(70, -5.71, "Inky", p, pointM);
+//            agent.setAnimation(animM.setAgentAnimation("Inky",dir));
+//            agent.setSpeed(15);
+//            agent.setHP(7);
+//            agent.setDmg(4);
+//            agent.setPath(generatePath());
         }
 
         if (num == 3)
         {
-            agent = new AgentEntity(70, -5.71, "Pinky", p, pointM);
-            agent.setAnimation(animM.setAgentAnimation("Pinky"));
-            agent.setSpeed(35);
-            agent.setHP(3);
-            agent.setDmg(1);
-            agent.setPath(generatePath());
+//            agent = new AgentEntity(70, -5.71, "Pinky", p, pointM);
+//            agent.setAnimation(animM.setAgentAnimation("Pinky",dir));
+//            agent.setSpeed(35);
+//            agent.setHP(3);
+//            agent.setDmg(1);
+//            agent.setPath(generatePath());
         }
 
         if (num == 4)
         {
-            agent = new AgentEntity(70, -5.71, "Clyde", p, pointM);
-            agent.setAnimation(animM.setAgentAnimation("Clyde"));
-            agent.setSpeed(25);
-            agent.setHP(5);
-            agent.setDmg(3);
-            agent.setPath(generatePath());
+//            agent = new AgentEntity(70, -5.71, "Clyde", p, pointM);
+//            agent.setAnimation(animM.setAgentAnimation("Clyde",dir));
+//            agent.setSpeed(25);
+//            agent.setHP(5);
+//            agent.setDmg(3);
+//            agent.setPath(generatePath());
         }
         return agent;
     }

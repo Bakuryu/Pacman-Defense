@@ -67,10 +67,10 @@ public class TWDGame extends ApplicationAdapter
 //        aFactory = new AgentEntityFactory(player, pointM);
 //       waveM = new WaveManager(aFactory, entM);
         
-        agentB = new AgentEntity(29.5, 26, "Blinky",player,pointM);
-        agentI = new AgentEntity(24, 21, "Inky",player,pointM);
-        agentP = new AgentEntity(29.5, 21, "Pinky",player,pointM);
-        agentC = new AgentEntity(35, 21, "Clyde",player,pointM);
+        agentB = new AgentEntity(29.5, 26, "Blinky",player,pointM,gMap);
+        agentI = new AgentEntity(24, 21, "Inky",player,pointM,gMap);
+        agentP = new AgentEntity(29.5, 21, "Pinky",player,pointM,gMap);
+        agentC = new AgentEntity(35, 21, "Clyde",player,pointM,gMap);
         player = new PlayerEntity(29.5, 16,gMap);
         entM.addEnt(player);
         entM.addEnt(agentB);

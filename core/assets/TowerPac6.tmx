@@ -142,15 +142,20 @@
     <property name="allBlock" value="true"/>
    </properties>
   </tile>
+  <tile id="58">
+   <properties>
+    <property name="valid" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Walls" width="61" height="42">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+1Zi27DMAhkaztpazpF2to9/v9D12i1hBBcMGZO2+wkqw/bmHMwELwlot2K2tO5vdK6MNI/54dze3S0DZiD+rwtWz6fIznvjb0pGC6fB/bfQYxBfV545e8vOg2EwefUcq7VqQfnWnn38Jw94OMk5yPhc3G6fH44ddLkbcR47UzWyD+xZunN5WX4baTTEuPnsFbOn2TnKwXF/or9cPuUOhzZuGJzfLw8g/z3nJ3L9VAc2xq8vskGf/5eP2XFDOR39qBPAx+D9BodsiT4HKlLrW/O9PNo/1o5oxiWqWftc+7FuSZGTmdMnmd+JuV51/p47JGxzWszPW271a9K1Ox3L9tGtpqBmrWvgfMz6fGCQ+t/Ca7dwnmKORbnQVl3MPoiey3nIflIr1H0cVg1FB67pW/x+qQMzh6fp/VZuZa0s2xE89pbrt1EdY/ahxeoPlhQU+Ph8TSDc3RtLd/+ImzbKD4jcD+SwTm6dnasQuBj3+h3b0vbGd/l7/fg2q37HeX813mYd2wrZxmreEP5cAa0fN5TA2rljIDyYaQfql+hGoN3TyOcvT5gybonQut7FarBLMkZ6bXUu2Tv+rY3VpXYXeKFlm8j2XP5sKe+Ha0xIL20fHviOOVaHhuI+hENmTWGiF4j9eecWWPI4Cx9gmZrci1PPtxS366RZd09Sd+mvZ/X3G221ipb656Ru9hIPn9NnD3IuH9Gdwlza/5lTd+CvIvV6jC8vqzdc2rxSJuDYo/V1yKr113srWGtnFF9UL7X30Ob8ssf2EJIKAgoAAA=
   </data>
  </layer>
- <layer name="PlayerAreas" width="61" height="42">
+ <layer name="AIPath" width="61" height="42">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAIBXAxntN+wIKAAA
+   H4sIAAAAAAAAC+2VQRKAIAwD+Zf//5d3R7GlCRSazHCSJl2F2lpNXYWWmH3q1Yz4sf3FLOZVPbH9xYyZg2/+K/Z753Yl5i8hz1dWL6Z3Vi+md1YvpndWL6Z3Vi+Ud2Sueua295lFYsblWv6XOzOPflsxY/p67mEsBPNuKytzT5Y9f3VR5kj2iMQ8L3dldjSXffeQPUfrT2D29sQ+24x3FfU+gRn5LHu2mOflzsiO3FnEHJ7pJWafvDXIu4DoV8ycXDHzvKw1lZkrrMrM1XQDtsDrYQgoAAA=
   </data>
  </layer>
  <objectgroup name="Level Boundries">

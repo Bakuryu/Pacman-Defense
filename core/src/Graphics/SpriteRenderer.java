@@ -124,9 +124,12 @@ public class SpriteRenderer
     {
         pAnim = p.getAnimation();
         curFrame = pAnim.getKeyFrame(stateTime, true);
+
         sBatch.begin();
 
         Point pScrPos = new Point(corT.worldToScreen(p.getPosition()));
+        Point pHurtBScrPos = new Point(corT.worldToScreen(p.getPosition().getX() + 0.5, p.getPosition().getY()-0.5));
+        p.getHurtBox().updatePos(pHurtBScrPos);
         p.getCollider().updatePos(pScrPos);
 
         switch (p.getDirMove())
@@ -159,17 +162,23 @@ public class SpriteRenderer
         Rectangle pUBox = new Rectangle(p.getCollider().getHitBox().x + 3, p.getCollider().getHitBox().y + 16, p.getCollider().getHitBox().width - 6, p.getCollider().getHitBox().height);
         Rectangle pDBox = new Rectangle(p.getCollider().getHitBox().x + 3, p.getCollider().getHitBox().y - 16, p.getCollider().getHitBox().width - 6, p.getCollider().getHitBox().height);
 
+        shapRen.begin(ShapeRenderer.ShapeType.Filled);
+        shapRen.setColor(Color.RED);
+        shapRen.circle((float) corT.worldToScreen(p.getCentPos()).x, (float) corT.worldToScreen(p.getCentPos()).y, 3);
+
+        shapRen.end();
         sBatch.begin();
         sDraw.drawRect((int) p.getCollider().getHitBox().x, (int) p.getCollider().getHitBox().y - 16, (int) p.getCollider().getHitBox().width, (int) p.getCollider().getHitBox().height, 1, Color.WHITE);
+        sDraw.drawRect((int) p.getHurtBox().getColX(), (int) p.getHurtBox().getColY(), (int) p.getHurtBox().getColW(), (int) p.getHurtBox().getColH(), 1, Color.RED);
         for (Rectangle rect : gMap.getMapCollisions())
         {
             sDraw.drawRect((int) rect.x, (int) rect.y - 16, (int) rect.width, (int) rect.height, 1, Color.RED);
         }
 
-        sDraw.drawRect((int) pRBox.x, (int) pRBox.y - 16, (int) pRBox.width, (int) pRBox.height, 1, Color.ORANGE);
-        sDraw.drawRect((int) pLBox.x, (int) pLBox.y - 16, (int) pLBox.width, (int) pLBox.height, 1, Color.ORANGE);
-        sDraw.drawRect((int) pUBox.x, (int) pUBox.y - 16, (int) pUBox.width, (int) pUBox.height, 1, Color.ORANGE);
-        sDraw.drawRect((int) pDBox.x, (int) pDBox.y - 16, (int) pDBox.width, (int) pDBox.height, 1, Color.ORANGE);
+//        sDraw.drawRect((int) pRBox.x, (int) pRBox.y - 16, (int) pRBox.width, (int) pRBox.height, 1, Color.ORANGE);
+//        sDraw.drawRect((int) pLBox.x, (int) pLBox.y - 16, (int) pLBox.width, (int) pLBox.height, 1, Color.ORANGE);
+//        sDraw.drawRect((int) pUBox.x, (int) pUBox.y - 16, (int) pUBox.width, (int) pUBox.height, 1, Color.ORANGE);
+//        sDraw.drawRect((int) pDBox.x, (int) pDBox.y - 16, (int) pDBox.width, (int) pDBox.height, 1, Color.ORANGE);
 
         sBatch.end();
 

@@ -16,6 +16,8 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -33,7 +35,6 @@ public class GameMap
     private TiledMap map;
     private OrthographicCamera cam;
     private TiledMapRenderer tRenderer;
-    private boolean blocked[][];
     private ArrayList<Rectangle> blocks;
     private ArrayList<Rectangle> free;
     private MapProperties mapProp;
@@ -42,6 +43,7 @@ public class GameMap
     private int numTilesY;
     private Stage stage;
     private ArrayList<Rectangle> collisionRects;
+    private boolean[][] validPath;
 
     public GameMap(Stage stage)
     {
@@ -62,8 +64,9 @@ public class GameMap
         free = new ArrayList<>();
         blocks = new ArrayList<>();
         collisionRects = new ArrayList<>();
+        
         getMapColliders();
-        //createColliders();
+        getAIPaths();
     }
 
     public void render()
@@ -95,57 +98,50 @@ public class GameMap
         }
     }
 
-//    //Figure out which tiles are collidable and store them in an array to for the player to check against.
-//    public void createColliders()
-//    {
-//        // This will create an Array with all the Tiles in your map. When set to true, it means that Tile is blocked.
-//        blocked = new boolean[numTilesX][numTilesY];
-//
-//        // Loop through the Tiles and read their Properties
-//        // Set here the Layer you want to Read. In your case, it'll be layer 1,
-//        // since the objects are on the second layer.
-//        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("Collision");
-//
-//        for (int j = 0; j <numTilesY; j++)
-//        {
-//            for (int i = 0; i < numTilesX; i++)
-//            {
-//                if (layer.getCell(i, j) != null)
-//                {
-//                    // Read a Tile
-//                    //TiledMapTile tile2 = (layer.getCell(0, 34).getTile());
-//                    TiledMapTile tile = layer.getCell(i,j).getTile();
-//
-//                    String value = tile.getProperties().get("blocked", String.class);
-//
-//                    // If the value of the Property is "true"...
-//                    if (value.equals("true"))
-//                    {
-//
-//                        //System.out.print("1 ");
-//                        // We set that index of the TileMap as blocked
-//                        blocked[i][j] = true;
-//
-//                        // And create the collision Rectangle
-//                        Point2D wP = (convertFromTileCord(i, j));
-//
-//                        blocks.add(new Rectangle((int)(i * layer.getTileWidth()), (int)(j * layer.getTileHeight()), (int)layer.getTileWidth(), (int)layer.getTileHeight()));
-//                    }
-//                    else
-//                    {
-//                        //System.out.print("0 ");
-//                    }
-//                }
-//                else
-//                {
-//                    //System.out.print("0 ");
-//                    free.add(new Rectangle((int)(i * layer.getTileWidth()), (int)((j) * layer.getTileHeight()), (int)layer.getTileWidth(), (int)layer.getTileHeight()));
-//                }
-//
-//            }
-//            //.out.println("");
-//        }
-//    }
+    //Figure out which tiles an AI can traverse
+    public void getAIPath()
+    {
+        // This will create an Array with all the Tiles in your map. When set to true, it means that Tile is blocked.
+        validPath = new boolean[numTilesX][numTilesY];
+
+        // Loop through the Tiles and read their Properties
+        // Set here the Layer you want to Read. In your case, it'll be layer 1,
+        // since the objects are on the second layer.
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("AIPath");
+
+        for (int j = 0; j <numTilesY; j++)
+        {
+            for (int i = 0; i < numTilesX; i++)
+            {
+                if (layer.getCell(i, j) != null)
+                {
+                    // Read a Tile
+                    //TiledMapTile tile2 = (layer.getCell(0, 34).getTile());
+                    TiledMapTile tile = layer.getCell(i,j).getTile();
+
+                    String value = tile.getProperties().get("valid", String.class);
+
+                    // If the value of the Property is "true"...
+                    if (value.equals("true"))
+                    {
+
+                        //System.out.print("1 ");
+                        // We set that index of the TileMap as blocked
+                        validPath[i][j] = true;
+
+                    }
+
+                }
+                else
+                {
+                    //System.out.print("0 ");
+                    free.add(new Rectangle((int)(i * layer.getTileWidth()), (int)((j) * layer.getTileHeight()), (int)layer.getTileWidth(), (int)layer.getTileHeight()));
+                }
+
+            }
+            //.out.println("");
+        }
+    }
     /* Returns list of blocks on the map that are collidable*/
     public ArrayList<Rectangle> getBlocRect()
     {
@@ -157,9 +153,9 @@ public class GameMap
         return free;
     }
 
-    public boolean[][] getBlocked()
+    public boolean[][] getAIPaths()
     {
-        return blocked;
+        return validPath;
     }
 
     public ArrayList<Rectangle> getMapCollisions()

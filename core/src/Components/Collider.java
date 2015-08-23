@@ -42,8 +42,8 @@ public class Collider
     }
 
     /**
-     * Create a collider with it's hitbox origin starting at entities origin x and y
-     * and it's width being hBw and it's height hBH.
+     * Create a collider with it's hitbox origin starting at entities origin x
+     * and y and it's width being hBw and it's height hBH.
      *
      * @param xPos entities origin x position
      * @param yPos entities origin x position
@@ -69,6 +69,19 @@ public class Collider
     {
         hBox.x = (int) pos.getX();
         hBox.y = (int) pos.getY();
+
+    }
+
+    /**
+     * Keep hitbox with entities position
+     *
+     * @param x position of entity
+     * @param y position of entity
+     */
+    public void updatePos(int x, int y)
+    {
+        hBox.x = x;;
+        hBox.y = y;
 
     }
 
@@ -119,6 +132,26 @@ public class Collider
     public Rectangle getHitBox()
     {
         return hBox;
+    }
+
+    public float getColX()
+    {
+        return hBox.x;
+    }
+
+    public float getColY()
+    {
+        return hBox.y;
+    }
+
+    public float getColW()
+    {
+        return hBox.width;
+    }
+
+    public float getColH()
+    {
+        return hBox.width;
     }
 
 }

@@ -259,8 +259,8 @@ public class TowerGUI
 //    }
     public boolean isNeighborBlocked(int x, int y)
     {
-        boolean isBlocked[][] = gMap.getBlocked();
-        return (isBlocked[x][y]);
+        //boolean isBlocked[][] = gMap.getBlocked();
+        return false;//(isBlocked[x][y]);
 
     }
 

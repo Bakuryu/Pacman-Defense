@@ -7,6 +7,7 @@ package Entity;
 
 import Components.Collider;
 import Components.Controller;
+import Components.PreCollider;
 import Graphics.AnimationManager;
 import Graphics.GameMap;
 import Math.CoordinateTranslator;
@@ -39,8 +40,11 @@ public class PlayerEntity extends Entity
     private Collider col;
     /* Game map, to be use for map collision in the future*/
     private GameMap gMap;
+    /* Player's hurt box*/
+    private Collider hurtBox;
     private CoordinateTranslator corT;
-    private int hp;
+    private PreCollider preCol;
+    private Point2D centerPos;
 
     /**
      * Create a new player entity, set it's location and initialize values
@@ -54,16 +58,17 @@ public class PlayerEntity extends Entity
         //startPos = new Point2D(x, y);
         //feetPos = new Point2D(x+4.3125,y-13.0625);
         position = new Point2D(x, y);
+        centerPos = new Point2D(x + 1, y);
         directionMoving = "N";
         directionFacing = "D";
-        hp = 10;
         animM = new AnimationManager();
         pAnim = animM.setPlayerAnimation(directionMoving);
         this.gMap = gMap;
         /* Create collider box the same size as player sprite*/
         col = new Collider(position, 32, 32);
-        contr = new Controller(gMap.getMapCollisions(),col);
-        
+        hurtBox = new Collider(position.getX()+0.5,position.getY()-0.5,16,16);
+        preCol = new PreCollider(gMap.getMapCollisions(), col);
+        contr = new Controller(gMap.getMapCollisions(), col, preCol);
 
     }
 
@@ -79,11 +84,15 @@ public class PlayerEntity extends Entity
 
 //        if (!col.checkWorldCollisions(col, gMap.getMapCollisions()))
 //        {
-            contr.move(position, (int) t);
-
+        contr.move(position, (int) t);
+        centerPos.setX(position.getX() + 1);
+        centerPos.setY(position.getY());
+        
+        //hurtBox.updatePos(position);
 //        }
         directionMoving = contr.lastKeyPressed();
-        System.out.println(position);
+        System.out.println("Pos :" + position);
+        System.out.println("CentPos : " + centerPos);
 //            if (!isCollidingWorld() && position.getX() < 293.0)
 //            {
 //                position.setX(contr.getMovement(position, directionMoving, t));
@@ -117,11 +126,6 @@ public class PlayerEntity extends Entity
 //            {
 //                position.setY(position.getY() + 1);
 //            }
-    }
-
-    public void takeDmg(int dmg)
-    {
-        hp -= dmg;
     }
 
     public void setCordT(CoordinateTranslator corT)
@@ -166,9 +170,14 @@ public class PlayerEntity extends Entity
         return col;
     }
 
-public Rectangle getPCB()
+    public Rectangle getPCB()
     {
         return contr.getPreColBox();
+    }
+    
+    public Collider getHurtBox()
+    {
+        return hurtBox;
     }
     /* Reset players position to it's starting position (Used by AgentEntity)*/
 //    public void resetPos()
@@ -189,13 +198,14 @@ public Rectangle getPCB()
 //    {
 //        gMap = map;
 //    }
-    public int getHP()
-    {
-        return hp;
-    }
 
     public String getDirMove()
     {
         return directionMoving;
+    }
+
+    public Point2D getCentPos()
+    {
+        return centerPos;
     }
 }
