@@ -155,10 +155,10 @@
  </layer>
  <layer name="AIPath" width="61" height="42">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+2VQRKAIAwD+Zf//5d3R7GlCRSazHCSJl2F2lpNXYWWmH3q1Yz4sf3FLOZVPbH9xYyZg2/+K/Z753Yl5i8hz1dWL6Z3Vi+md1YvpndWL6Z3Vi+Ud2Sueua295lFYsblWv6XOzOPflsxY/p67mEsBPNuKytzT5Y9f3VR5kj2iMQ8L3dldjSXffeQPUfrT2D29sQ+24x3FfU+gRn5LHu2mOflzsiO3FnEHJ7pJWafvDXIu4DoV8ycXDHzvKw1lZkrrMrM1XQDtsDrYQgoAAA=
+   H4sIAAAAAAAAC+2USxLAIAhDvVfvf6/uO/2IJEAlmXGlJLxWGaOnjkZLzDa91az4sf3FLOasntj+YsbMwTv/jPPWud2J+UnI+1XVi+ld1YvpXdWL6V3Vi+ld1Qvl7Zmrlrlt3ZuRmONyM7MRuav/VsyYvq5nGAvB/LdVlflNM2e+6rzMnuwViTkuNzPbm8t+e8ievfU7MFt7Yt9txrfyeu/AjNyrni3muNyIbM+bRczhSC8x22StQb4FRL9i5uSKmec1W9OZucPqzNxNJ0ALVgsIKAAA
   </data>
  </layer>
- <objectgroup name="Level Boundries">
+ <objectgroup name="Level Boundries" visible="0">
   <object id="53" x="48" y="48" width="176" height="80"/>
   <object id="54" x="256" y="48" width="80" height="272"/>
   <object id="55" x="0" y="160" width="112" height="160"/>

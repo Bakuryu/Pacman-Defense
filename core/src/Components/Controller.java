@@ -36,8 +36,8 @@ public class Controller
     public Controller(ArrayList<Rectangle> collisions, Collider pCol, PreCollider preCol)
     {
         input = new Input();
-        keyPressed = "L";
-        dirKeyPressed = "L";
+        keyPressed = "N";
+        dirKeyPressed = "N";
         isMoving = false;
         speed = 35.0;
         mapCollisionBoxes = collisions;
@@ -60,10 +60,10 @@ public class Controller
      */
     public void move(Point2D curPos, int t)
     {
-        System.out.println("rCollision: " + rCollision);
-        System.out.println("lCollision: " + lCollision);
-        System.out.println("uCollision: " + uCollision);
-        System.out.println("dCollision: " + dCollision);
+//        System.out.println("rCollision: " + rCollision);
+//        System.out.println("lCollision: " + lCollision);
+//        System.out.println("uCollision: " + uCollision);
+//        System.out.println("dCollision: " + dCollision);
 //        System.out.println("rBlocked: " + rBlocked);
 //        System.out.println("lBlocked: " + lBlocked);
 //        System.out.println("uBlocked: " + uBlocked);

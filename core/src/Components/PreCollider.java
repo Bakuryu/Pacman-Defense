@@ -48,10 +48,10 @@ public class PreCollider
 
     public void update()
     {
-        System.out.println("rBlocked: " + rBlocked);
-        System.out.println("lBlocked: " + lBlocked);
-        System.out.println("uBlocked: " + uBlocked);
-        System.out.println("dBlocked: " + dBlocked);
+//        System.out.println("rBlocked: " + rBlocked);
+//        System.out.println("lBlocked: " + lBlocked);
+//        System.out.println("uBlocked: " + uBlocked);
+//        System.out.println("dBlocked: " + dBlocked);
         rBox.set(eCol.hBox.x + 16, eCol.hBox.y + 3, eCol.hitBoxW, eCol.hitBoxH - 6);
         lBox.set(eCol.hBox.x - 16, eCol.hBox.y + 3, eCol.hitBoxW, eCol.hitBoxH - 6);
         uBox.set(eCol.hBox.x + 3, eCol.hBox.y + 16, eCol.hitBoxW - 6, eCol.hitBoxH);

@@ -16,25 +16,20 @@ public class TileConverter
 
     public Point convertToTileCord(Point2D p)
     {
-        int tx = (int) (p.getX() / 2.5);
-        double hMY = p.getY();
-        double hDTF = 100.0 / 35.0;
-        double total = hMY / hDTF;
+        double tx = p.getX();
 
-        int ty = (int) total;
+        int ty = 36 - (int)p.getY();
 
-        Point tilePoint = new Point(tx, ty);
+        Point tilePoint = new Point((int) tx, ty);
 
         return tilePoint;
     }
 
     public Point2D convertFromTileCord(int x, int y)
     {
-        double wX = 0;
+        double wX = x + 0.5;
 
-        wX = x * 2.5;
-        double hDTF = (double) 100 / 35;
-        double wY = (y * hDTF);
+        double wY = (36 - y) + 0.5;
 
         Point2D worldPoint = new Point2D(wX, wY);
         return worldPoint;

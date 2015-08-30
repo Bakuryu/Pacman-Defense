@@ -58,15 +58,15 @@ public class PlayerEntity extends Entity
         //startPos = new Point2D(x, y);
         //feetPos = new Point2D(x+4.3125,y-13.0625);
         position = new Point2D(x, y);
-        centerPos = new Point2D(x + 1, y);
+        centerPos = new Point2D(x + 0.5, y + 0.5);
         directionMoving = "N";
         directionFacing = "D";
         animM = new AnimationManager();
         pAnim = animM.setPlayerAnimation(directionMoving);
         this.gMap = gMap;
         /* Create collider box the same size as player sprite*/
-        col = new Collider(position, 32, 32);
-        hurtBox = new Collider(position.getX()+0.5,position.getY()-0.5,16,16);
+        col = new Collider(position.getX(), position.getY(), 16, 16);
+        hurtBox = new Collider(position.getX(), position.getY(), 16, 16);
         preCol = new PreCollider(gMap.getMapCollisions(), col);
         contr = new Controller(gMap.getMapCollisions(), col, preCol);
 
@@ -85,14 +85,14 @@ public class PlayerEntity extends Entity
 //        if (!col.checkWorldCollisions(col, gMap.getMapCollisions()))
 //        {
         contr.move(position, (int) t);
-        centerPos.setX(position.getX() + 1);
-        centerPos.setY(position.getY());
-        
+        centerPos.setX(position.getX() + 0.5);
+        centerPos.setY(position.getY() + 0.5);
+
         //hurtBox.updatePos(position);
 //        }
         directionMoving = contr.lastKeyPressed();
-        System.out.println("Pos :" + position);
-        System.out.println("CentPos : " + centerPos);
+//        System.out.println("Pos :" + position);
+//        System.out.println("CentPos : " + centerPos);
 //            if (!isCollidingWorld() && position.getX() < 293.0)
 //            {
 //                position.setX(contr.getMovement(position, directionMoving, t));
@@ -174,7 +174,7 @@ public class PlayerEntity extends Entity
     {
         return contr.getPreColBox();
     }
-    
+
     public Collider getHurtBox()
     {
         return hurtBox;

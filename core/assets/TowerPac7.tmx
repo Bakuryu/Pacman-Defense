@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="55" height="37" tilewidth="16" tileheight="16" nextobjectid="228">
+ <tileset firstgid="1" name="PacMan" tilewidth="16" tileheight="16">
+  <image source="graphics/PacMan.png" width="160" height="160"/>
+  <tile id="0">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="allBlock" value="true"/>
+   </properties>
+  </tile>
+  <tile id="58">
+   <properties>
+    <property name="valid" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="101" name="PacManAnim3" tilewidth="16" tileheight="16">
+  <tileoffset x="8" y="8"/>
+  <image source="graphics/PacManAnim3.png" width="128" height="32"/>
+ </tileset>
+ <layer name="Walls" width="55" height="37">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC91Zi27DIAz01oe0NZsibe0e//+hK1qtoZMPbAjp2pNQWuoaH48Dk62I7O6w7M/lVe4Ts/xxeziXR0fZEHtW7y1L+VX7nNuh0g/T5fkCT6nUe1Hze7jEMEkZah/h5o1hJLeIn1sbNw/ULud2lPI8Pl2eH5UYLD8bsLXWjsfvKSssTvWTc4uCxbCmbQmJ26fw/SFB+1j7SscA2zxmNtq3zFa/l8avZqu+tyT+7wJvHU/PumLaxdbKgdRbUBsWx+zwgdD/YPsRzahx6/HRw43p55LcPOM2kptXk9N6wPWmawfXItbn2oeaWtsb1piTrXqG8PblyDnJ5tmT2LqVw/r9OdjeNbi1tJX/bzS3pOkWtwnamoz6JbhZflkcM9TnYLmd7n243mv60MutpjtYz84euA6WQOsZbkSOXMrJE6I5YWuMOm7R9qwz15eUx42tbQad/73cWvK0KKI5q9qtza2lvdZ8/E1+54SWHfmM39/Bj7e9Hm6ok5i/YFu9sM5ypRy0hxtDJCfD3L2kDWyPbo3TAtOtWr456r6ExbHmWXmtu6Br5AH/iZvufapbeOZiPktnI889VzTXY3FYZ67EZV/hXfIZwRK5XjSOWbhmYH9iG56zUU37enyw+9RcYzC38N6399x1tN6XrPU+4BrcPMi5Rc9xLfdvPZq61PsAvHOy7t5RDy17pn1WfauPke8D/jtK7wPyveIWS9qffwBcC41gzB8AAA==
+  </data>
+ </layer>
+ <layer name="AIPath" width="55" height="37" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2WSwrAMAhEc6/e/17dBunHz4wYUcgmmDczCZWu1buuhmvPZr0Ly342d7JxPbC4k43rgcWV2bxzSDIze63+JNOyX5nBYFZhMJhVGAxmFQaDWYURZSL/AyM+NJWpla3n1fK+12T739fU6dkQ3/+Tx6xz1rmkvZe3fvS7ofxFzk62s7OdoOfRYn7/UX9ar2itr/Oou9BqWfYr6k02jFa2XodsnpkRnX1sxt5jKUs/4o0j/iabr3+y4fRkf/ds3Vb3ugES58NzzB8AAA==
+  </data>
+ </layer>
+ <objectgroup name="Level Boundries">
+  <object id="53" x="32" y="32" width="176" height="80"/>
+  <object id="54" x="224" y="32" width="80" height="256"/>
+  <object id="55" x="0" y="128" width="112" height="160"/>
+  <object id="56" x="128" y="128" width="80" height="160"/>
+  <object id="62" x="304" y="128" width="80" height="80"/>
+  <object id="63" x="0" y="0" width="864" height="16"/>
+  <object id="65" x="0" y="16" width="16" height="112"/>
+  <object id="68" x="0" y="304" width="112" height="160"/>
+  <object id="70" x="0" y="464" width="16" height="112"/>
+  <object id="72" x="0" y="576" width="864" height="16"/>
+  <object id="73" x="864" y="464" width="16" height="128"/>
+  <object id="74" x="768" y="304" width="112" height="160"/>
+  <object id="75" x="768" y="128" width="112" height="160"/>
+  <object id="76" x="864" y="0" width="16" height="128"/>
+  <object id="78" x="32" y="480" width="176" height="80"/>
+  <object id="79" x="224" y="480" width="160" height="80"/>
+  <object id="80" x="224" y="304" width="80" height="160"/>
+  <object id="81" x="320" y="384" width="240" height="80"/>
+  <object id="83" x="400" y="464" width="80" height="96"/>
+  <object id="84" x="320" y="224" width="96" height="16"/>
+  <object id="85" x="464" y="224" width="96" height="16"/>
+  <object id="86" x="544" y="240" width="16" height="112"/>
+  <object id="87" x="320" y="240" width="16" height="112"/>
+  <object id="88" x="320" y="352" width="240" height="16"/>
+  <object id="90" x="320" y="32" width="240" height="80"/>
+  <object id="91" x="400" y="112" width="80" height="96"/>
+  <object id="93" x="576" y="32" width="80" height="256"/>
+  <object id="94" x="496" y="128" width="80" height="80"/>
+  <object id="95" x="576" y="304" width="80" height="160"/>
+  <object id="97" x="496" y="480" width="160" height="80"/>
+  <object id="98" x="672" y="32" width="176" height="80"/>
+  <object id="99" x="672" y="128" width="80" height="160"/>
+  <object id="102" x="672" y="480" width="176" height="80"/>
+  <object id="110" x="672" y="400" width="80" height="80"/>
+  <object id="112" x="128" y="304" width="96" height="80"/>
+  <object id="113" x="128" y="400" width="80" height="80"/>
+  <object id="116" x="656" y="304" width="96" height="80"/>
+ </objectgroup>
+</map>

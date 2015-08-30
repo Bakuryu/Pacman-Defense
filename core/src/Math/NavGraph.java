@@ -6,6 +6,7 @@
 package Math;
 
 import Graphics.GameMap;
+import java.awt.Point;
 import java.util.ArrayList;
 
 /**
@@ -16,10 +17,17 @@ public class NavGraph
 {
 
     private GameMap gMap;
+    private TileConverter tConv;
+    private Point2D upNeighborPoint;
+    private Point2D leftNeighborPoint;
+    private Point2D rightNeighborPoint;
+    private Point2D downNeighborPoint;
+    private Point pTilePos;
 
     public NavGraph(GameMap gMap)
     {
         this.gMap = gMap;
+        tConv = new TileConverter();
     }
 
     public Iterable<Point2D> getNeightbors(Point2D p)
@@ -27,26 +35,47 @@ public class NavGraph
         ArrayList<Point2D> ret = new ArrayList<>();
         boolean[][] validPath = gMap.getAIPaths();
 
-        if (validPath[((int) p.getX()) - 1][(int) p.getY()] && validPath[((int) p.getX()) - 1][((int) p.getY()) + 1])
+        pTilePos = new Point(tConv.convertToTileCord(p));
+
+        //Up
+        if (pTilePos.y - 1 > -1)
         {
-            ret.add(new Point2D(p.getX() - 1, p.getY() + 1));
+            if (validPath[pTilePos.x][pTilePos.y - 1])
+            {
+                upNeighborPoint = new Point2D(tConv.convertFromTileCord(pTilePos.x, pTilePos.y - 1));
+                ret.add(upNeighborPoint);
+            }
         }
 
-        if (validPath[(int) p.getX()][((int) p.getY()) + 2] && validPath[((int) p.getX()) + 1][((int) p.getY()) + 2])
+        //Left
+        if (pTilePos.x - 1 > -1)
         {
-            ret.add(new Point2D(p.getX() + 1, p.getY() + 2));
+            if (validPath[pTilePos.x - 1][pTilePos.y])
+            {
+                leftNeighborPoint = new Point2D(tConv.convertFromTileCord(pTilePos.x - 1, pTilePos.y));
+                ret.add(leftNeighborPoint);
+            }
         }
 
-        if (validPath[(int) p.getX()][((int) p.getY()) - 1] && validPath[((int) p.getX()) + 1][((int) p.getY()) - 1])
+        //Down
+        if (pTilePos.y + 1 < 37)
         {
-            ret.add(new Point2D(p.getX() + 1, p.getY() - 1));
+            if (validPath[pTilePos.x][pTilePos.y + 1])
+            {
+                downNeighborPoint = new Point2D(tConv.convertFromTileCord(pTilePos.x, pTilePos.y + 1));
+                ret.add(downNeighborPoint);
+            }
         }
 
-        if (validPath[((int) p.getX()) + 2][(int) p.getY()] && validPath[((int) p.getX()) + 2][((int) p.getY()) + 1])
+        //Right
+        if (pTilePos.x + 1 < 55)
         {
-            ret.add(new Point2D(p.getX() + 2, p.getY() + 1));
+            if (validPath[pTilePos.x + 1][pTilePos.y])
+            {
+                rightNeighborPoint = new Point2D(tConv.convertFromTileCord(pTilePos.x + 1, pTilePos.y));
+                ret.add(rightNeighborPoint);
+            }
         }
-        
         return ret;
 
     }

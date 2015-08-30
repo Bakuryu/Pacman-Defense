@@ -55,18 +55,18 @@ public class GameMap
         cam = new OrthographicCamera();
         cam.setToOrtho(false, w, h);
         cam.update();
-        map = new TmxMapLoader().load("TowerPac6.tmx");
+        map = new TmxMapLoader().load("TowerPac7.tmx");
         tRenderer = new OrthogonalTiledMapRenderer(map);
         mapProp = map.getProperties();
         mapLayer = map.getLayers();
-        numTilesX = mapProp.get("width", Integer.class) - 7;
+        numTilesX = mapProp.get("width", Integer.class);
         numTilesY = mapProp.get("height", Integer.class);
         free = new ArrayList<>();
         blocks = new ArrayList<>();
         collisionRects = new ArrayList<>();
         
         getMapColliders();
-        getAIPaths();
+        getAIPath();
     }
 
     public void render()
@@ -93,7 +93,7 @@ public class GameMap
             RectangleMapObject obj = (RectangleMapObject) collisionObjects.get(i);
             Rectangle rect = obj.getRectangle();
             
-            collisionRects.add(new Rectangle((int)rect.x,(int) rect.y+16, rect.width , rect.height));
+            collisionRects.add(new Rectangle((int)rect.x,(int) rect.y, rect.width , rect.height));
 
         }
     }

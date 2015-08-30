@@ -1,8 +1,10 @@
 package TWDGDX;
 
+import AgentStates.AgentChase;
 import Entity.AgentEntity;
 import Entity.AgentEntityFactory;
 import Entity.EntityManager;
+import Entity.EntityState;
 import Entity.PlayerEntity;
 import Entity.WaveManager;
 import Graphics.TowerGUI;
@@ -49,6 +51,7 @@ public class TWDGame extends ApplicationAdapter
     private SpriteBatch sBatch;
     private Sound gameStart;
     private Sound pacDie;
+    private EntityState aState;
 
     @Override
     public void create()
@@ -63,24 +66,23 @@ public class TWDGame extends ApplicationAdapter
         pointM = new PointManager();
         pointM.addPoints(6);
 
-        
 //        aFactory = new AgentEntityFactory(player, pointM);
 //       waveM = new WaveManager(aFactory, entM);
-        
-        agentB = new AgentEntity(29.5, 26, "Blinky",player,pointM,gMap);
-        agentI = new AgentEntity(24, 21, "Inky",player,pointM,gMap);
-        agentP = new AgentEntity(29.5, 21, "Pinky",player,pointM,gMap);
-        agentC = new AgentEntity(35, 21, "Clyde",player,pointM,gMap);
-        player = new PlayerEntity(29.5, 16,gMap);
+        player = new PlayerEntity(27, 13, gMap);
+        agentB = new AgentEntity(27, 23, "Blinky", player, pointM, gMap);
+//        agentI = new AgentEntity(24, 21, "Inky", player, pointM, gMap);
+//        agentP = new AgentEntity(29.5, 21, "Pinky", player, pointM, gMap);
+//        agentC = new AgentEntity(35, 21, "Clyde", player, pointM, gMap);
+
         entM.addEnt(player);
         entM.addEnt(agentB);
-        entM.addEnt(agentI);
-        entM.addEnt(agentP);
-        entM.addEnt(agentC);
-        
-        corT1 = new CoordinateTranslator(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()-100, 61, 42, new Point2D(0, 0));
+//        entM.addEnt(agentI);
+//        entM.addEnt(agentP);
+//        entM.addEnt(agentC);
+
+        corT1 = new CoordinateTranslator(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() - 100, 55, 37, new Point2D(0, 0));
         corT2 = new CoordinateTranslator(Gdx.graphics.getWidth() - 640, Gdx.graphics.getHeight(), 17.5, 100, new Point2D(-100, 0));
-        sRen = new SpriteRenderer(entM, corT1,gMap);
+        sRen = new SpriteRenderer(entM, corT1, gMap);
 
         //sGUI = new SideMenuGUI(corT2, pointM, waveM);
         //tGUI = new TowerGUI(gMap, corT1, entM, sGUI, pointM);
@@ -103,7 +105,6 @@ public class TWDGame extends ApplicationAdapter
             gMap.render();
 
             //tGUI.render();
-
             //sGUI.render();
             sRen.render();
 
@@ -132,6 +133,7 @@ public class TWDGame extends ApplicationAdapter
 //        {
 //            isGameWon = true;
 //        }
+//        System.out.println("Blinky:" + agentB.getCenterPos());
         entM.updateEnts(deltaTime);
 //        if (player.getHP() <= 0)
 //        {
