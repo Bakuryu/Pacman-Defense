@@ -165,15 +165,15 @@ public class SpriteRenderer
         Rectangle pUBox = new Rectangle(p.getCollider().getHitBox().x + 3, p.getCollider().getHitBox().y + 16, p.getCollider().getHitBox().width - 6, p.getCollider().getHitBox().height);
         Rectangle pDBox = new Rectangle(p.getCollider().getHitBox().x + 3, p.getCollider().getHitBox().y - 16, p.getCollider().getHitBox().width - 6, p.getCollider().getHitBox().height);
 
-        shapRen.begin(ShapeRenderer.ShapeType.Filled);
-        shapRen.setColor(Color.RED);
-        shapRen.circle((float) corT.worldToScreen(p.getCentPos()).x, (float) corT.worldToScreen(p.getCentPos()).y, 3);
-        shapRen.setColor(Color.BLUE);
-        shapRen.circle((float) corT.worldToScreen(p.getPosition()).x, (float) corT.worldToScreen(p.getPosition()).y, 1);
-        shapRen.end();
-        sBatch.begin();
-        sDraw.drawRect((int) p.getCollider().getColX(), (int) p.getCollider().getColY(), (int) p.getCollider().getColW(), (int) p.getCollider().getColH(), 1, Color.WHITE);
-        sDraw.drawRect((int) p.getHurtBox().getColX(), (int) p.getHurtBox().getColY(), (int) p.getHurtBox().getColW(), (int) p.getHurtBox().getColH(), 1, Color.RED);
+//        shapRen.begin(ShapeRenderer.ShapeType.Filled);
+//        shapRen.setColor(Color.RED);
+//        shapRen.circle((float) corT.worldToScreen(p.getCentPos()).x, (float) corT.worldToScreen(p.getCentPos()).y, 3);
+//        shapRen.setColor(Color.BLUE);
+//        shapRen.circle((float) corT.worldToScreen(p.getPosition()).x, (float) corT.worldToScreen(p.getPosition()).y, 1);
+//        shapRen.end();
+//        sBatch.begin();
+//        sDraw.drawRect((int) p.getCollider().getColX(), (int) p.getCollider().getColY(), (int) p.getCollider().getColW(), (int) p.getCollider().getColH(), 1, Color.WHITE);
+//        sDraw.drawRect((int) p.getHurtBox().getColX(), (int) p.getHurtBox().getColY(), (int) p.getHurtBox().getColW(), (int) p.getHurtBox().getColH(), 1, Color.RED);
         for (Rectangle rect : gMap.getMapCollisions())
         {
             //sDraw.drawRect((int) rect.x, (int) rect.y, (int) rect.width, (int) rect.height, 1, Color.RED);
@@ -183,7 +183,7 @@ public class SpriteRenderer
 //        sDraw.drawRect((int) pLBox.x, (int) pLBox.y, (int) pLBox.width, (int) pLBox.height, 1, Color.ORANGE);
 //        sDraw.drawRect((int) pUBox.x, (int) pUBox.y, (int) pUBox.width, (int) pUBox.height, 1, Color.ORANGE);
 //        sDraw.drawRect((int) pDBox.x, (int) pDBox.y , (int) pDBox.width, (int) pDBox.height, 1, Color.ORANGE);
-        sBatch.end();
+//        sBatch.end();
 
         //Agent Debug Visuals
 //        Rectangle aRBox = new Rectangle();
@@ -198,13 +198,13 @@ public class SpriteRenderer
             Rectangle aLBox = new Rectangle(a.getCollider().getHitBox().x - 16, a.getCollider().getHitBox().y + 3, a.getCollider().getHitBox().width, a.getCollider().getHitBox().height - 6);
             Rectangle aUBox = new Rectangle(a.getCollider().getHitBox().x + 3, a.getCollider().getHitBox().y + 16, a.getCollider().getHitBox().width - 6, a.getCollider().getHitBox().height);
             Rectangle aDBox = new Rectangle(a.getCollider().getHitBox().x + 3, a.getCollider().getHitBox().y - 16, a.getCollider().getHitBox().width - 6, a.getCollider().getHitBox().height);
-            shapRen.begin(ShapeRenderer.ShapeType.Filled);
-            shapRen.setColor(Color.YELLOW);
-            shapRen.circle((float) corT.worldToScreen(a.getCenterPos()).x, (float) corT.worldToScreen(a.getCenterPos()).y, 3);
-            shapRen.setColor(Color.BLUE);
-            shapRen.circle((float) corT.worldToScreen(a.getPosition()).x, (float) corT.worldToScreen(a.getPosition()).y, 1);
-            shapRen.end();
-            sDraw.drawRect((int) a.getCollider().getColX(), (int) a.getCollider().getColY(), (int) a.getCollider().getColW(), (int) a.getCollider().getColH(), 1, Color.WHITE);
+//            shapRen.begin(ShapeRenderer.ShapeType.Filled);
+//            shapRen.setColor(Color.YELLOW);
+//            shapRen.circle((float) corT.worldToScreen(a.getCenterPos()).x, (float) corT.worldToScreen(a.getCenterPos()).y, 3);
+//            shapRen.setColor(Color.BLUE);
+//            shapRen.circle((float) corT.worldToScreen(a.getPosition()).x, (float) corT.worldToScreen(a.getPosition()).y, 1);
+//            shapRen.end();
+//            sDraw.drawRect((int) a.getCollider().getColX(), (int) a.getCollider().getColY(), (int) a.getCollider().getColW(), (int) a.getCollider().getColH(), 1, Color.WHITE);
 
 //            sDraw.drawRect((int) aRBox.x, (int) aRBox.y - 16, (int) aRBox.width, (int) aRBox.height, 1, Color.ORANGE);
 //            sDraw.drawRect((int) aLBox.x, (int) aLBox.y - 16, (int) aLBox.width, (int) aLBox.height, 1, Color.ORANGE);

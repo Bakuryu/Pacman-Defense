@@ -46,10 +46,10 @@ public class AnimationManager
         AFRAME_ROW = 4;
         PFRAME_COL = 4;
         PFRAME_ROW = 1;
-        blinky = new Texture("graphics/Blinky.png");
-        inky = new Texture("graphics/Inky.png");
-        pinky = new Texture("graphics/Pinky.png");
-        clyde = new Texture("graphics/Clyde.png");
+        blinky = new Texture("graphics/Blinky2.png");
+        inky = new Texture("graphics/Inky2.png");
+        pinky = new Texture("graphics/Pinky2.png");
+        clyde = new Texture("graphics/Clyde2.png");
         pacman = new Texture("graphics/PacManAnim4.png");
         scared = new Texture("graphics/BlueGhostAnim.png");
         curPAnim = "IDLE";
