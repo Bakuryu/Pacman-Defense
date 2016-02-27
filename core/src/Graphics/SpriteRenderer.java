@@ -165,25 +165,25 @@ public class SpriteRenderer
         Rectangle pUBox = new Rectangle(p.getCollider().getHitBox().x + 3, p.getCollider().getHitBox().y + 16, p.getCollider().getHitBox().width - 6, p.getCollider().getHitBox().height);
         Rectangle pDBox = new Rectangle(p.getCollider().getHitBox().x + 3, p.getCollider().getHitBox().y - 16, p.getCollider().getHitBox().width - 6, p.getCollider().getHitBox().height);
 
-//        shapRen.begin(ShapeRenderer.ShapeType.Filled);
-//        shapRen.setColor(Color.RED);
-//        shapRen.circle((float) corT.worldToScreen(p.getCentPos()).x, (float) corT.worldToScreen(p.getCentPos()).y, 3);
-//        shapRen.setColor(Color.BLUE);
-//        shapRen.circle((float) corT.worldToScreen(p.getPosition()).x, (float) corT.worldToScreen(p.getPosition()).y, 1);
-//        shapRen.end();
-//        sBatch.begin();
-//        sDraw.drawRect((int) p.getCollider().getColX(), (int) p.getCollider().getColY(), (int) p.getCollider().getColW(), (int) p.getCollider().getColH(), 1, Color.WHITE);
-//        sDraw.drawRect((int) p.getHurtBox().getColX(), (int) p.getHurtBox().getColY(), (int) p.getHurtBox().getColW(), (int) p.getHurtBox().getColH(), 1, Color.RED);
+        shapRen.begin(ShapeRenderer.ShapeType.Filled);
+        shapRen.setColor(Color.RED);
+        shapRen.circle((float) corT.worldToScreen(p.getCentPos()).x, (float) corT.worldToScreen(p.getCentPos()).y, 3);
+        shapRen.setColor(Color.BLUE);
+        shapRen.circle((float) corT.worldToScreen(p.getPosition()).x, (float) corT.worldToScreen(p.getPosition()).y, 1);
+        shapRen.end();
+        sBatch.begin();
+        sDraw.drawRect((int) p.getCollider().getColX(), (int) p.getCollider().getColY(), (int) p.getCollider().getColW(), (int) p.getCollider().getColH(), 1, Color.WHITE);
+        sDraw.drawRect((int) p.getHurtBox().getColX(), (int) p.getHurtBox().getColY(), (int) p.getHurtBox().getColW(), (int) p.getHurtBox().getColH(), 1, Color.RED);
         for (Rectangle rect : gMap.getMapCollisions())
         {
-            //sDraw.drawRect((int) rect.x, (int) rect.y, (int) rect.width, (int) rect.height, 1, Color.RED);
+            sDraw.drawRect((int) rect.x, (int) rect.y, (int) rect.width, (int) rect.height, 1, Color.RED);
         }
 
-//        sDraw.drawRect((int) pRBox.x, (int) pRBox.y, (int) pRBox.width, (int) pRBox.height, 1, Color.ORANGE);
-//        sDraw.drawRect((int) pLBox.x, (int) pLBox.y, (int) pLBox.width, (int) pLBox.height, 1, Color.ORANGE);
-//        sDraw.drawRect((int) pUBox.x, (int) pUBox.y, (int) pUBox.width, (int) pUBox.height, 1, Color.ORANGE);
-//        sDraw.drawRect((int) pDBox.x, (int) pDBox.y , (int) pDBox.width, (int) pDBox.height, 1, Color.ORANGE);
-//        sBatch.end();
+        sDraw.drawRect((int) pRBox.x, (int) pRBox.y, (int) pRBox.width, (int) pRBox.height, 1, Color.ORANGE);
+        sDraw.drawRect((int) pLBox.x, (int) pLBox.y, (int) pLBox.width, (int) pLBox.height, 1, Color.ORANGE);
+        sDraw.drawRect((int) pUBox.x, (int) pUBox.y, (int) pUBox.width, (int) pUBox.height, 1, Color.ORANGE);
+        sDraw.drawRect((int) pDBox.x, (int) pDBox.y , (int) pDBox.width, (int) pDBox.height, 1, Color.ORANGE);
+        sBatch.end();
 
         //Agent Debug Visuals
 //        Rectangle aRBox = new Rectangle();

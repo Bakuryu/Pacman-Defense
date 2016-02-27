@@ -106,8 +106,8 @@ public class AgentEntity extends Entity
 //        centerPos.setY(position.getY() + 0.5);
         position.setX(centerPos.getX() - 0.5);
         position.setY(centerPos.getY() - 0.5);
-        System.out.println("BlinkyPos: " + position);
-        System.out.println("BlinkyCentPos: " + centerPos);
+        //System.out.println("BlinkyPos: " + position);
+        //System.out.println("BlinkyCentPos: " + centerPos);
         
         if (aCurState != null)
         {

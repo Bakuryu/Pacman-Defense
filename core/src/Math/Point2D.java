@@ -211,6 +211,11 @@ public class Point2D
         return "(" + x + ", " + y + ")";
     }
 
+    /**
+     * Calculate the distance between two points
+     * @param pt point who's distance we are trying to find
+     * @return the distance, positive or negative between the original point and pt
+     */
     public double distance(Point2D pt)
     {
 
@@ -221,4 +226,5 @@ public class Point2D
         return (px * px) + (py * py);
 
     }
+    
 }
