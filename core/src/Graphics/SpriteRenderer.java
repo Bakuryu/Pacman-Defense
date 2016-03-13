@@ -125,6 +125,7 @@ public class SpriteRenderer
     {
         pAnim = p.getAnimation();
         curFrame = pAnim.getKeyFrame(stateTime, true);
+        int rotation = 0;
 
         sBatch.begin();
 
@@ -135,21 +136,23 @@ public class SpriteRenderer
         switch (p.getDirMove())
         {
             case "R":
-                sBatch.draw(curFrame, pScrPos.x - 8, pScrPos.y - 8, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, -180);
+                rotation = -180;
                 break;
             case "L":
-                sBatch.draw(curFrame, pScrPos.x - 8, pScrPos.y - 8, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, 0);
+                rotation = 0;
                 break;
             case "U":
-                sBatch.draw(curFrame, pScrPos.x - 8, pScrPos.y - 8, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, -90);
+                rotation = -90;
                 break;
             case "D":
-                sBatch.draw(curFrame, pScrPos.x - 8, pScrPos.y - 8, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, 90);
+                rotation = 90;
                 break;
             case "N":
-                sBatch.draw(curFrame, pScrPos.x - 8, pScrPos.y - 8, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, 0);
+                rotation = 0;
                 break;
         }
+        sBatch.draw(curFrame, pScrPos.x - 8, pScrPos.y - 8, 16, 16, (float) curFrame.getRegionWidth(), (float) curFrame.getRegionHeight(), 1, 1, rotation);
+
         sBatch.end();
 
     }
@@ -159,6 +162,7 @@ public class SpriteRenderer
 
         //Player Debug Visuals
         PlayerEntity p = (PlayerEntity) entM.getEnts().get(0);
+        //System.out.println("Screen Pos: " + corT.worldToScreen(p.getPosition()));
 
         Rectangle pRBox = new Rectangle(p.getCollider().getHitBox().x + 16, p.getCollider().getHitBox().y + 3, p.getCollider().getHitBox().width, p.getCollider().getHitBox().height - 6);
         Rectangle pLBox = new Rectangle(p.getCollider().getHitBox().x - 16, p.getCollider().getHitBox().y + 3, p.getCollider().getHitBox().width, p.getCollider().getHitBox().height - 6);

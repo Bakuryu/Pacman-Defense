@@ -92,7 +92,7 @@ public class PlayerEntity extends Entity
 //        }
         directionMoving = contr.lastKeyPressed();
         System.out.println("Pos :" + position);
-        System.out.println("CentPos : " + centerPos);
+        //System.out.println("CentPos : " + centerPos);
 //            if (!isCollidingWorld() && position.getX() < 293.0)
 //            {
 //                position.setX(contr.getMovement(position, directionMoving, t));

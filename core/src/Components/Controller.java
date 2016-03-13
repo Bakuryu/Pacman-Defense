@@ -17,6 +17,7 @@ public class Controller
     private Input input;
     private String keyPressed;
     private String lastKeyPressed;
+    private String lastMoved;
     private boolean isMoving;
     private double speed;
     private ArrayList<Rectangle> mapCollisionBoxes;
@@ -61,281 +62,226 @@ public class Controller
      */
     public void move(Point2D curPos, int t)
     {
-        System.out.println("rCollision: " + rCollision);
+        //System.out.println("rCollision: " + rCollision);
         System.out.println("lCollision: " + lCollision);
         System.out.println("uCollision: " + uCollision);
-        System.out.println("dCollision: " + dCollision);
-        System.out.println("rBlocked: " + preCol.isRBlocked());
+//        System.out.println("dCollision: " + dCollision);
+        //System.out.println("rBlocked: " + preCol.isRBlocked());
         System.out.println("lBlocked: " + preCol.isLBlocked());
         System.out.println("uBlocked: " + preCol.isUBlocked());
-        System.out.println("dBlocked: " + preCol.isDBlocked());
-        System.out.println("lastKeyPressed :" + lastKeyPressed);
+        System.out.println("LastMoved: " + lastMoved);
+//        System.out.println("dBlocked: " + preCol.isDBlocked());
+//        System.out.println("lastKeyPressed :" + lastKeyPressed);
         keyPressed = input.checkKeys();
         preCol.update();
 
         System.out.println("keyPressed: " + keyPressed);
+        checkForCollision(keyPressed, t);
         switch (keyPressed)
         {
 
             case "RIGHT":
-                
                 lastKeyPressed = "R";
-                checkForCollision(keyPressed, t);
-                
-                if (!rCollision)
-                {
-                    moveRight(curPos, t);
-                }
-
-                if (rCollision && !preCol.isRBlocked())//rBlocked)
-                {
-                    curPos.setY(Math.round(curPos.getY()));
-                    rCollision = false;
-                }
-
+                moveRight(curPos, t);
                 break;
+                
             case "LEFT":
-
                 lastKeyPressed = "L";
-
-                checkForCollision(keyPressed, t);
-                if (!lCollision)
-                {
-                    moveLeft(curPos, t);
-                }
-
-                if (lCollision && !preCol.isLBlocked())//lBlocked)
-                {
-                    curPos.setY(Math.round(curPos.getY()));
-                    lCollision = false;
-                }
+                moveLeft(curPos, t);
                 break;
-            case "UP":
                 
+            case "UP":
                 lastKeyPressed = "U";
+                moveUp(curPos, t);
+                break;
 
-                checkForCollision(keyPressed, t);
-                if (!uCollision)
+            case "UPR":
+                if (!preCol.isUBlocked())
                 {
-                    moveUp(curPos, t);
+                    if (!preCol.isRBlocked())
+                    {
+                        if (lastMoved == "U")
+                        {
+                            lastKeyPressed = "R";
+                            moveRight(curPos, t);
+                        }
+                        else if (lastMoved == "R")
+                        {
+                            lastKeyPressed = "U";
+                            moveUp(curPos, t);
+                        }
+                    }
+                    else
+                    {
+                        lastKeyPressed = "U";
+                        moveUp(curPos, t);
+                    }
                 }
-
-                if (uCollision && !preCol.isUBlocked())//uBlocked)
+                else
                 {
-                    curPos.setX(Math.round(curPos.getX()));
-                    uCollision = false;
+                    if (!preCol.isRBlocked())
+                    {
+                        lastKeyPressed = "R";
+                        moveRight(curPos, t);
+                    }
+                    else
+                    {
+                        if (lastMoved == "U" && !uCollision)
+                        {
+                            lastKeyPressed = "U";
+                            moveUp(curPos, t);
+                        }
+
+                        if (lastMoved == "R" && !rCollision)
+                        {
+                            lastKeyPressed = "R";
+                            moveRight(curPos, t);
+                        }
+                    }
                 }
                 break;
-            case "UPR":
-//                if (lastKeyPressed == "R" || lastKeyPressed == "L")
-//                {
-                if (preCol.isUBlocked() && !preCol.isRBlocked())//uBlocked)
+                
+            case "UPL":
+                if (!preCol.isUBlocked())
                 {
-
-                    lastKeyPressed = "R";
-                    checkForCollision(keyPressed, t);
-                    if (!rCollision)
+                    if (!preCol.isLBlocked())
                     {
-
-//                        if (checkForCollision(keyPressed, t))
-//                        {
-//                            if (!lCollision)
-//                            {
-//                                curPos.setX(Math.round(curPos.getX() - speed * t / 1000));
-//                                rCollision = true;
-//                            }
-//                        }
-//                        else
-//                        {
-                            moveRight(curPos, t);
-//                        }
-                    }
-//                    else if (rCollision && !preCol.isUBlocked())
-//                    {
-//                        curPos.setX(Math.round(curPos.getX()));
-//                        lastKeyPressed = "U";
-//                        if (!uCollision)
-//                        {
-//                            if (checkForCollision(keyPressed, t))
-//                            {
-//                                if (!dCollision)
-//                                {
-//                                    curPos.setY(Math.round(curPos.getY() - speed * t / 1000));
-//                                    uCollision = true;
-//                                }
-//                            }
-//                            else
-//                            {
-//                                moveUp(curPos, t);
-//                            }
-//                        }
-//                    }
-                }
-                else if (!preCol.isUBlocked() && !preCol.isRBlocked())
-                {
-                    curPos.setX(Math.round(curPos.getX()));
-                    
-                    lastKeyPressed = "U";
-                    checkForCollision(keyPressed, t);
-                    if (!uCollision)
-                    {
-//                        if (checkForCollision(keyPressed, t))
-//                        {
-//                            if (!dCollision)
-//                            {
-//                                curPos.setY(Math.round(curPos.getY() - speed * t / 1000));
-//                                uCollision = true;
-//                            }
-//                        }
-//                        else
-//                        {
-                            moveUp(curPos, t);
-//                        }
-                    }
-
-                }
-                else if (preCol.isUBlocked() && preCol.isRBlocked())
-                {
-                    checkForCollision(keyPressed, t);
-                    if (lastKeyPressed == "R")
-                    {
-                        if(!rCollision)
+                        if (lastMoved == "U")
                         {
-                            moveRight(curPos,t);
+                            lastKeyPressed = "L";
+                            moveLeft(curPos, t);
+                        }
+                        else if (lastMoved == "L")
+                        {
+                            lastKeyPressed = "U";
+                            moveUp(curPos, t);
                         }
                     }
-                    else if(lastKeyPressed == "U")
+                    else
                     {
-                        if (!uCollision)
+                        lastKeyPressed = "U";
+                        lCollision = true;
+                        moveUp(curPos, t);
+                    }
+                }
+                else
+                {
+                    if (!preCol.isLBlocked())
+                    {
+                        lastKeyPressed = "L";
+                        moveLeft(curPos, t);
+                    }
+                    else
+                    {
+                        if (lastMoved == "U" || lastMoved == "D" && !uCollision)
                         {
-                            moveUp(curPos,t);
+                            lastKeyPressed = "U";
+                            moveUp(curPos, t);
+                        }
+
+                        if (lastMoved == "L" || lastMoved == "R" && !lCollision)
+                        {
+                            lastKeyPressed = "L";
+                            moveLeft(curPos, t);
                         }
                     }
                 }
-                else if (preCol.isRBlocked() && !preCol.isUBlocked())
-                {
-                    curPos.setX(Math.round(curPos.getX()));
-                    lastKeyPressed = "U";
-                    checkForCollision(keyPressed, t);
-                    if (!uCollision)
-                    {
-//                        if (checkForCollision(keyPressed, t))
-//                        {
-//                            if (!dCollision)
-//                            {
-//                                curPos.setY(Math.round(curPos.getY() - speed * t / 1000));
-//                                uCollision = true;
-//                            }
-//                        }
-//                        else
-//                        {
-                            moveUp(curPos, t);
-//                        }
-                    }
-                }
-//                }
-//                if (lastKeyPressed == "U")
-//                {
-//                if (preCol.isRBlocked())
-//                {
-//                    if (!uCollision)
-//                    {
-//                        if (checkForCollision(keyPressed, t))
-//                        {
-//                            if (!dCollision)
-//                            {
-//                                curPos.setY(Math.round(curPos.getY() - speed * t / 1000));
-//                                uCollision = true;
-//                            }
-//                        }
-//                        else
-//                        {
-//                            moveUp(curPos, t);
-//                        }
-//                    }
-//                    else if (uCollision && !(preCol.isRBlocked()))
-//                    {
-//                        curPos.setY(Math.round(curPos.getY()));
-//                        lastKeyPressed = "R";
-//                        if (!rCollision)
-//                        {
-//
-//                            if (checkForCollision(keyPressed, t))
-//                            {
-//                                if (!lCollision)
-//                                {
-//                                    curPos.setX(Math.round(curPos.getX() - speed * t / 1000));
-//                                    rCollision = true;
-//                                }
-//                            }
-//                            else
-//                            {
-//                                moveRight(curPos, t);
-//                            }
-//                        }
-//
-//                    }
-//                }
-//                else if (!preCol.isRBlocked() && !preCol.isUBlocked())
-//                {
-//                    curPos.setX(Math.round(curPos.getX()));
-//                    lastKeyPressed = "U";
-//                    if (!uCollision)
-//                    {
-//                        if (checkForCollision(keyPressed, t))
-//                        {
-//                            if (!dCollision)
-//                            {
-//                                curPos.setY(Math.round(curPos.getY() - speed * t / 1000));
-//                                uCollision = true;
-//                            }
-//                        }
-//                        else
-//                        {
-//                            moveUp(curPos, t);
-//                        }
-//                    }
-//                }
-//                else
-//                {
-//                    curPos.setY(Math.round(curPos.getY()));
-//                    lastKeyPressed = "R";
-//                    if (!rCollision)
-//                    {
-//
-//                        if (checkForCollision(keyPressed, t))
-//                        {
-//                            if (!lCollision)
-//                            {
-//                                curPos.setX(Math.round(curPos.getX() - speed * t / 1000));
-//                                rCollision = true;
-//                            }
-//                        }
-//                        else
-//                        {
-//                            moveRight(curPos, t);
-//                        }
-//                    }
-////                       
-//                }
-//                }
                 break;
 
             case "DOWN":
-                
                 lastKeyPressed = "D";
-
-                checkForCollision(keyPressed, t);
-                if (!dCollision)
+                moveDown(curPos, t);
+                break;
+                
+            case "DOWNR":
+                if (!preCol.isDBlocked())
                 {
-
-                    moveDown(curPos, t);
+                    if (!preCol.isRBlocked())
+                    {
+                        if (lastMoved == "D")
+                        {
+                            lastKeyPressed = "R";
+                            moveRight(curPos, t);
+                        }
+                        else if (lastMoved == "R")
+                        {
+                            lastKeyPressed = "D";
+                            moveDown(curPos, t);
+                        }
+                    }
+                    else
+                    {
+                        lastKeyPressed = "D";
+                        moveDown(curPos, t);
+                    }
                 }
-//                }
-                if (!preCol.isDBlocked())//dBlocked)
+                else
                 {
-                    curPos.setX(Math.round(curPos.getX()));
-                    dCollision = false;
+                    if (!preCol.isRBlocked())
+                    {
+                        lastKeyPressed = "R";
+                        moveRight(curPos, t);
+                    }
+                    else
+                    {
+                        if (lastMoved == "D" && !dCollision)
+                        {
+                            lastKeyPressed = "D";
+                            moveDown(curPos, t);
+                        }
+
+                        if (lastMoved == "R" && !rCollision)
+                        {
+                            lastKeyPressed = "R";
+                            moveRight(curPos, t);
+                        }
+                    }
+                }
+                break;
+            case "DOWNL":
+                if (!preCol.isDBlocked())
+                {
+                    if (!preCol.isLBlocked())
+                    {
+                        if (lastMoved == "D")
+                        {
+                            lastKeyPressed = "L";
+                            moveLeft(curPos, t);
+                        }
+                        else if (lastMoved == "L")
+                        {
+                            lastKeyPressed = "D";
+                            moveDown(curPos, t);
+                        }
+                    }
+                    else
+                    {
+                        lastKeyPressed = "D";
+                        lCollision = true;
+                        moveDown(curPos, t);
+                    }
+                }
+                else
+                {
+                    if (!preCol.isLBlocked())
+                    {
+                        lastKeyPressed = "L";
+                        moveLeft(curPos, t);
+                    }
+                    else
+                    {
+                        if (lastMoved == "D" || lastMoved == "U" && !dCollision)
+                        {
+                            lastKeyPressed = "D";
+                            moveDown(curPos, t);
+                        }
+
+                        if (lastMoved == "L" || lastMoved == "R" && !lCollision)
+                        {
+                            lastKeyPressed = "L";
+                            moveLeft(curPos, t);
+                        }
+                    }
                 }
                 break;
         }
@@ -344,35 +290,72 @@ public class Controller
 
     private void moveRight(Point2D curPos, int t)
     {
-        curPos.setX(curPos.getX() + speed * t / 1000);
-        lCollision = false;
-        dCollision = false;
-        uCollision = false;
+
+        if (!rCollision)
+        {
+            curPos.setX(curPos.getX() + speed * t / 1000);
+            lastMoved = "R";
+            lCollision = false;
+        }
+
+        if (rCollision && !preCol.isRBlocked())//rBlocked)
+        {
+            curPos.setY(Math.round(curPos.getY()));
+            rCollision = false;
+        }
+
     }
 
     private void moveLeft(Point2D curPos, int t)
     {
-        curPos.setX(curPos.getX() - speed * t / 1000);
-        rCollision = false;
-        uCollision = false;
-        dCollision = false;
+        if (!lCollision)
+        {
+            curPos.setX(curPos.getX() - speed * t / 1000);
+            lastMoved = "L";
+            rCollision = false;
+        }
+
+        if (lCollision && !preCol.isLBlocked())//lBlocked)
+        {
+            curPos.setY(Math.round(curPos.getY()));
+            lCollision = false;
+        }
+
     }
 
     private void moveUp(Point2D curPos, int t)
     {
-        curPos.setY(curPos.getY() + speed * t / 1000);
-        dCollision = false;
-        lCollision = false;
-        rCollision = false;
+
+        if (!uCollision)
+        {
+            curPos.setY(curPos.getY() + speed * t / 1000);
+            lastMoved = "U";
+            dCollision = false;
+        }
+
+        if (uCollision && !preCol.isUBlocked())//uBlocked)
+        {
+            curPos.setX(Math.round(curPos.getX()));
+            uCollision = false;
+        }
+
     }
 
     private void moveDown(Point2D curPos, int t)
     {
+        if (!dCollision)
+        {
+            curPos.setY(curPos.getY() - speed * t / 1000);
+            lastMoved = "D";
+            uCollision = false;
+        }
+//                }
+        if (!preCol.isDBlocked())//dBlocked)
+        {
+            curPos.setX(Math.round(curPos.getX()));
+            dCollision = false;
+        }
 
-        curPos.setY(curPos.getY() - speed * t / 1000);
-        uCollision = false;
-        lCollision = false;
-        rCollision = false;
     }
 
     public String lastKeyPressed()
@@ -421,12 +404,77 @@ public class Controller
                 Vector2 mCenter = new Vector2();
                 rect.getCenter(mCenter);
                 Vector2 dist = new Vector2(pCenter.sub(mCenter));
-                System.out.println("Vector Dist: " + dist.x);
-                if (dir == "LEFT"/*noColDistX > Math.abs(pCenter.sub(mCenter).x)*/);
+
+                if (dir == "UPR")
+                {
+                    if (dist.y < 0)
+                    {
+                        uCollision = true;
+                        System.out.println("Vector Dist Y: " + dist.y);
+                    }
+
+                    if (dist.x < 0)
+                    {
+                        rCollision = true;
+                        System.out.println("Vector Dist X: " + dist.x);
+
+                    }
+                }
+
+                if (dir == "UPL")
+                {
+                    if (dist.y < 0)
+                    {
+                        uCollision = true;
+                        System.out.println("Vector Dist Y: " + dist.y);
+                    }
+
+                    if (dist.x > 0)
+                    {
+                        lCollision = true;
+                        System.out.println("Vector Dist X: " + dist.x);
+
+                    }
+                }
+
+                if (dir == "DOWNR")
+                {
+                    if (dist.y > 0)
+                    {
+                        dCollision = true;
+                        System.out.println("Vector Dist Y: " + dist.y);
+                    }
+
+                    if (dist.x < 0)
+                    {
+                        rCollision = true;
+                        System.out.println("Vector Dist X: " + dist.x);
+
+                    }
+                }
+
+                if (dir == "DOWNL")
+                {
+                    if (dist.y > 0)
+                    {
+                        dCollision = true;
+                        System.out.println("Vector Dist Y: " + dist.y);
+                    }
+
+                    if (dist.x > 0)
+                    {
+                        lCollision = true;
+                        System.out.println("Vector Dist X: " + dist.x);
+
+                    }
+                }
+
+                if (dir == "LEFT");
                 {
                     if (dist.x > 0)
                     {
                         lCollision = true;
+                        System.out.println("Vector Dist X: " + dist.x);
 
                     }
 
@@ -436,14 +484,16 @@ public class Controller
                     if (dist.x < 0)
                     {
                         rCollision = true;
+                        System.out.println("Vector Dist X: " + dist.x);
 
                     }
                 }
-                if (dir == "UP"/*noColDistY > Math.abs(pCenter.sub(mCenter).y)*/)
+                if (dir == "UP")
                 {
                     if (dist.y < 0)
                     {
                         uCollision = true;
+                        System.out.println("Vector Dist Y: " + dist.y);
                     }
                 }
                 if (dir == "DOWN")
@@ -451,8 +501,10 @@ public class Controller
                     if (dist.y > 0)
                     {
                         dCollision = true;
+                        System.out.println("Vector Dist Y: " + dist.y);
                     }
                 }
+
                 collided = true;
             }
         }
